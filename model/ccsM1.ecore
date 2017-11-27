@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ccsM1">
+  <eClassifiers xsi:type="ecore:EClass" name="Client" eSuperTypes="cCS.ecore#//Component">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="send_request" eType="#//Send_Request"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientrequestport" eType="#//ClientRequestPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Server" eSuperTypes="cCS.ecore#//Component">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverdetail" eType="#//ServerDetail"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receive_request" eType="#//Receive_Request"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverrequestredirectport"
+        eType="#//ServerRequestRedirectPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClientServer" eSuperTypes="cCS.ecore#//Configuration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="server" lowerBound="1"
+        eType="#//Server"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="client" upperBound="-1"
+        eType="#//Client"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rpc" eType="#//RPC"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachfromclient" eType="#//AttachFromClient"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachtoserver" eType="#//AttachToServer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientserverport" eType="#//ClientServerPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionManager" eSuperTypes="cCS.ecore#//Component">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionmanagerrequestport"
+        eType="#//ConnectionManagerRequestPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontosecurityport"
+        eType="#//ConnectionToSecurityPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontodatabaseport"
+        eType="#//ConnectionToDatabasePort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityManager" eSuperTypes="cCS.ecore#//Component">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitytoconnectionport"
+        eType="#//SecurityToConnectionPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitytodatabaseport"
+        eType="#//SecurityToDatabasePort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerDetail" eSuperTypes="cCS.ecore#//Configuration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitymanager" eType="#//SecurityManager"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="database" eType="#//Database"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionmanager" eType="#//ConnectionManager"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailrequestport" eType="#//DetailRequestPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailtoconnectionport"
+        eType="#//DetailToConnectionPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Database" eSuperTypes="cCS.ecore#//Component">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasetoconnectionport"
+        eType="#//DatabaseToConnectionPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasetosecurityport"
+        eType="#//DatabaseToSecurityPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RPC" eSuperTypes="cCS.ecore#//Connector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caller" eType="#//Called"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="#//Caller"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="communicationglue" eType="#//CommunicationGlue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Called" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Caller" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Send_Request" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Receive_Request" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachFromClient" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caller" eType="#//Caller"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="send_request" eType="#//Send_Request"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachToServer" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receive_request" eType="#//Receive_Request"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="#//Called"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommunicationGlue" eSuperTypes="cCS.ecore#//Glue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BindServerToDetail" eSuperTypes="cCS.ecore#//Binding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionport" eType="#//DetailRequestPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverrequestredirectport"
+        eType="#//ServerRequestRedirectPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClientServerPort" eSuperTypes="cCS.ecore#//PortConfiguration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DetailRequestPort" eSuperTypes="cCS.ecore#//PortConfiguration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_Security" eSuperTypes="cCS.ecore#//Connector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontosecurityrole"
+        eType="#//ConnectionToSecurityRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitytoconnectionrole"
+        eType="#//SecurityToConnectionRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_Database" eSuperTypes="cCS.ecore#//Connector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontodatabaserole"
+        eType="#//ConnectionToDatabaseRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasetoconnectionrole"
+        eType="#//DatabaseToConnectionRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Database_Security" eSuperTypes="cCS.ecore#//Connector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasetosecurityrole"
+        eType="#//DatabaseToSecurityRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitytodatabaserole"
+        eType="#//SecurityToDatabaseRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClientRequestPort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NewEClass23"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BindRequestToClient">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientrequestport" eType="#//ClientRequestPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientserverport" eType="#//ClientServerPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServerRequestRedirectPort"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionManagerRequestPort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DetailToConnectionPort" eSuperTypes="cCS.ecore#//PortConfiguration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BindConnectionToServerDetail" eSuperTypes="cCS.ecore#//Binding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectionmanagerrequestport"
+        eType="#//ConnectionManagerRequestPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailtoconnectionport"
+        eType="#//DetailToConnectionPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionToSecurityPort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionToDatabasePort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseToConnectionPort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseToSecurityPort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityToConnectionPort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityToDatabasePort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionToSecurityRole" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionToDatabaseRole" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseToConnectionRole" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatabaseToSecurityRole" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityToConnectionRole" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecurityToDatabaseRole" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachConnectionSecurity" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontosecurityport"
+        eType="#//ConnectionToSecurityPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontosecurityrole"
+        eType="#//ConnectionToSecurityRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachSecurityConnection" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitytoconnectionrole"
+        eType="#//SecurityToConnectionRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitytoconnectionport"
+        eType="#//SecurityToConnectionPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachDatabaseConnection" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasetoconnectionport"
+        eType="#//DatabaseToConnectionPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasetoconnectionrole"
+        eType="#//DatabaseToConnectionRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachConnectionDatabase" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontodatabaseport"
+        eType="#//ConnectionToDatabasePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontodatabaserole"
+        eType="#//ConnectionToDatabaseRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachSecurityDatabase" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitytodatabaserole"
+        eType="#//SecurityToDatabaseRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="securitytodatabaseport"
+        eType="#//SecurityToDatabasePort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachDatabaseSecurity" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasetosecurityport"
+        eType="#//DatabaseToSecurityPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="databasetosecurityrole"
+        eType="#//DatabaseToSecurityRole"/>
+  </eClassifiers>
+</ecore:EPackage>

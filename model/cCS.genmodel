@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/CCS/src-gen" creationIcons="false" editDirectory="/CCS.edit/src-gen"
+    editorDirectory="/CCS.editor/src-gen" modelPluginID="CCS" modelName="CCS" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>cCS.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="CCS" disposableProviderFactory="true" ecorePackage="cCS.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="cCS.ecore#//Mode">
+      <genEnumLiterals ecoreEnumLiteral="cCS.ecore#//Mode/REQUIRED"/>
+      <genEnumLiterals ecoreEnumLiteral="cCS.ecore#//Mode/OFFERED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="cCS.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="cCS.ecore#//Visibility/PRIVATE"/>
+      <genEnumLiterals ecoreEnumLiteral="cCS.ecore#//Visibility/PUBLIC"/>
+      <genEnumLiterals ecoreEnumLiteral="cCS.ecore#//Visibility/PROTECTED"/>
+    </genEnums>
+    <genClasses ecoreClass="cCS.ecore#//Configuration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Configuration/connector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Configuration/component"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Configuration/portconfiguration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Configuration/ilink"/>
+    </genClasses>
+    <genClasses ecoreClass="cCS.ecore#//Connector">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cCS.ecore#//Connector/glue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Connector/role"/>
+    </genClasses>
+    <genClasses ecoreClass="cCS.ecore#//Component">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Component/configuration"/>
+    </genClasses>
+    <genClasses ecoreClass="cCS.ecore#//Role"/>
+    <genClasses ecoreClass="cCS.ecore#//Port"/>
+    <genClasses ecoreClass="cCS.ecore#//Attachement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cCS.ecore#//Attachement/icomponentelement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cCS.ecore#//Attachement/role"/>
+    </genClasses>
+    <genClasses ecoreClass="cCS.ecore#//Binding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cCS.ecore#//Binding/port"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference cCS.ecore#//Binding/portconfiguration"/>
+    </genClasses>
+    <genClasses ecoreClass="cCS.ecore#//Service"/>
+    <genClasses image="false" ecoreClass="cCS.ecore#//IComponentElement"/>
+    <genClasses image="false" ecoreClass="cCS.ecore#//ILink"/>
+    <genClasses ecoreClass="cCS.ecore#//Glue"/>
+    <genClasses ecoreClass="cCS.ecore#//InterfaceElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cCS.ecore#//InterfaceElement/mode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cCS.ecore#//InterfaceElement/visibility"/>
+      <genOperations ecoreOperation="cCS.ecore#//InterfaceElement/SetMode">
+        <genParameters ecoreParameter="cCS.ecore#//InterfaceElement/SetMode/mode"/>
+      </genOperations>
+      <genOperations ecoreOperation="cCS.ecore#//InterfaceElement/SetVisibility">
+        <genParameters ecoreParameter="cCS.ecore#//InterfaceElement/SetVisibility/visibility"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="cCS.ecore#//PortConfiguration"/>
+  </genPackages>
+</genmodel:GenModel>

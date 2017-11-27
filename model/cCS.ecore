@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ccsM2" nsURI="http://www.example.org/cCS" nsPrefix="cCS">
+  <eClassifiers xsi:type="ecore:EClass" name="Configuration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connector" upperBound="-1"
+        eType="#//Connector" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
+        upperBound="-1" eType="#//Component" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="portconfiguration" upperBound="-1"
+        eType="#//PortConfiguration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ilink" upperBound="-1"
+        eType="#//ILink" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connector">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="glue" eType="#//Glue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" upperBound="-1" eType="#//Role"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configuration" eType="#//Configuration"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//InterfaceElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//IComponentElement #//InterfaceElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Attachement" eSuperTypes="#//ILink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="icomponentelement" lowerBound="1"
+        eType="#//IComponentElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="#//Role"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Binding" eSuperTypes="#//ILink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" lowerBound="1" eType="#//Port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="portconfiguration" lowerBound="1"
+        eType="#//PortConfiguration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service" eSuperTypes="#//IComponentElement #//InterfaceElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IComponentElement" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ILink" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Glue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfaceElement">
+    <eOperations name="SetMode">
+      <eParameters name="mode" eType="#//Mode"/>
+    </eOperations>
+    <eOperations name="SetVisibility">
+      <eParameters name="visibility" eType="#//Visibility"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//Mode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//Visibility"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortConfiguration" eSuperTypes="#//InterfaceElement"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Mode">
+    <eLiterals name="REQUIRED"/>
+    <eLiterals name="OFFERED" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
+    <eLiterals name="PRIVATE"/>
+    <eLiterals name="PUBLIC" value="1"/>
+    <eLiterals name="PROTECTED" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>
