@@ -19,6 +19,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="configuration" eType="#//Configuration"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="icomponentelement" upperBound="-1"
+        eType="#//IComponentElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//InterfaceElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//IComponentElement #//InterfaceElement"/>

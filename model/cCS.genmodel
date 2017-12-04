@@ -29,6 +29,7 @@
     </genClasses>
     <genClasses ecoreClass="cCS.ecore#//Component">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Component/configuration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Component/icomponentelement"/>
     </genClasses>
     <genClasses ecoreClass="cCS.ecore#//Role"/>
     <genClasses ecoreClass="cCS.ecore#//Port"/>

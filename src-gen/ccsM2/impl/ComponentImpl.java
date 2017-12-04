@@ -6,14 +6,19 @@ import ccsM2.CCSPackage;
 import ccsM2.Component;
 import ccsM2.Configuration;
 
+import ccsM2.IComponentElement;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +29,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link ccsM2.impl.ComponentImpl#getConfiguration <em>Configuration</em>}</li>
+ *   <li>{@link ccsM2.impl.ComponentImpl#getIcomponentelement <em>Icomponentelement</em>}</li>
  * </ul>
  *
  * @generated
@@ -38,6 +44,16 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	 * @ordered
 	 */
 	protected Configuration configuration;
+
+	/**
+	 * The cached value of the '{@link #getIcomponentelement() <em>Icomponentelement</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIcomponentelement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<IComponentElement> icomponentelement;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,11 +129,26 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<IComponentElement> getIcomponentelement() {
+		if (icomponentelement == null) {
+			icomponentelement = new EObjectContainmentEList<IComponentElement>(IComponentElement.class, this,
+					CCSPackage.COMPONENT__ICOMPONENTELEMENT);
+		}
+		return icomponentelement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 		case CCSPackage.COMPONENT__CONFIGURATION:
 			return basicSetConfiguration(null, msgs);
+		case CCSPackage.COMPONENT__ICOMPONENTELEMENT:
+			return ((InternalEList<?>) getIcomponentelement()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -132,6 +163,8 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 		switch (featureID) {
 		case CCSPackage.COMPONENT__CONFIGURATION:
 			return getConfiguration();
+		case CCSPackage.COMPONENT__ICOMPONENTELEMENT:
+			return getIcomponentelement();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -141,11 +174,16 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 		case CCSPackage.COMPONENT__CONFIGURATION:
 			setConfiguration((Configuration) newValue);
+			return;
+		case CCSPackage.COMPONENT__ICOMPONENTELEMENT:
+			getIcomponentelement().clear();
+			getIcomponentelement().addAll((Collection<? extends IComponentElement>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -162,6 +200,9 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 		case CCSPackage.COMPONENT__CONFIGURATION:
 			setConfiguration((Configuration) null);
 			return;
+		case CCSPackage.COMPONENT__ICOMPONENTELEMENT:
+			getIcomponentelement().clear();
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -176,6 +217,8 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 		switch (featureID) {
 		case CCSPackage.COMPONENT__CONFIGURATION:
 			return configuration != null;
+		case CCSPackage.COMPONENT__ICOMPONENTELEMENT:
+			return icomponentelement != null && !icomponentelement.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

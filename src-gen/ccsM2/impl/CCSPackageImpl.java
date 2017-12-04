@@ -299,6 +299,15 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getComponent_Icomponentelement() {
+		return (EReference) componentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRole() {
 		return roleEClass;
 	}
@@ -515,6 +524,7 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 
 		componentEClass = createEClass(COMPONENT);
 		createEReference(componentEClass, COMPONENT__CONFIGURATION);
+		createEReference(componentEClass, COMPONENT__ICOMPONENTELEMENT);
 
 		roleEClass = createEClass(ROLE);
 
@@ -616,6 +626,9 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 				IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getComponent_Configuration(), this.getConfiguration(), null, "configuration", null, 0, 1,
 				Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponent_Icomponentelement(), this.getIComponentElement(), null, "icomponentelement", null,
+				0, -1, Component.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

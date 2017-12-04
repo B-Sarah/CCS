@@ -188,13 +188,22 @@ public interface CCSPackage extends EPackage {
 	int COMPONENT__CONFIGURATION = 0;
 
 	/**
+	 * The feature id for the '<em><b>Icomponentelement</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPONENT__ICOMPONENTELEMENT = 1;
+
+	/**
 	 * The number of structural features of the '<em>Component</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_FEATURE_COUNT = 1;
+	int COMPONENT_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Component</em>' class.
@@ -829,6 +838,17 @@ public interface CCSPackage extends EPackage {
 	EReference getComponent_Configuration();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link ccsM2.Component#getIcomponentelement <em>Icomponentelement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Icomponentelement</em>'.
+	 * @see ccsM2.Component#getIcomponentelement()
+	 * @see #getComponent()
+	 * @generated
+	 */
+	EReference getComponent_Icomponentelement();
+
+	/**
 	 * Returns the meta object for class '{@link ccsM2.Role <em>Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1142,6 +1162,14 @@ public interface CCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPONENT__CONFIGURATION = eINSTANCE.getComponent_Configuration();
+
+		/**
+		 * The meta object literal for the '<em><b>Icomponentelement</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPONENT__ICOMPONENTELEMENT = eINSTANCE.getComponent_Icomponentelement();
 
 		/**
 		 * The meta object literal for the '{@link ccsM2.impl.RoleImpl <em>Role</em>}' class.
