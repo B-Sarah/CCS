@@ -79,18 +79,21 @@
         eType="#//ConnectionToSecurityRole"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="securitytoconnectionrole"
         eType="#//SecurityToConnectionRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverdetail" eType="#//ServerDetail"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Connection_Database" eSuperTypes="cCS.ecore#//Connector">
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontodatabaserole"
         eType="#//ConnectionToDatabaseRole"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="databasetoconnectionrole"
         eType="#//DatabaseToConnectionRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverdetail" eType="#//ServerDetail"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Database_Security" eSuperTypes="cCS.ecore#//Connector">
     <eStructuralFeatures xsi:type="ecore:EReference" name="databasetosecurityrole"
         eType="#//DatabaseToSecurityRole"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="securitytodatabaserole"
         eType="#//SecurityToDatabaseRole"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serverdetail" eType="#//ServerDetail"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClientRequestPort" eSuperTypes="cCS.ecore#//Port"/>
   <eClassifiers xsi:type="ecore:EClass" name="NewEClass23"/>

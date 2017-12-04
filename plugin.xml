@@ -10,7 +10,7 @@
       <!-- @generated cCS -->
       <package
             uri="http://www.example.org/cCS"
-            class="cCS.CCSPackage"
+            class="ccsM2.CCSPackage"
             genModel="model/cCS.genmodel"/>
    </extension>
 
