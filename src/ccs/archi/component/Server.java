@@ -2,19 +2,19 @@ package ccs.archi.component;
 
 import ccsM2.Mode;
 import ccsM2.Port;
-import ccsM2.impl.ComponentImpl;
+import ccsM2.impl.*;
 
 public class Server extends ComponentImpl {
 	
 	public enum PortName{
-		receive_request = 0,
-		serverRequestRedirectPort = 1
+		receive_request,
+		serverRequestRedirectPort 
 	}
 	
 	public Server() {
-		Port receive_request = new Port();
+		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
 		receive_request.setMode(Mode.REQUIRED);
-		Port serverRequestRedirectPort = new Port();
+		Port serverRequestRedirectPort =  CCSFactoryImpl.eINSTANCE.createPort();
 		serverRequestRedirectPort.setMode(Mode.OFFERED);
 		
 		this.icomponentelement.add(receive_request);
