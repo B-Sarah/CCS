@@ -19,23 +19,21 @@ public class Client extends ComponentImpl {
 	public Client() {
 		//init communication port (client->server) 
 		Port send_request = CCSFactoryImpl.eINSTANCE.createPort();
-		send_request.setMode(Mode.OFFERED);
-		this.icomponentelement.add(send_request);
-		
 		//init request redirect port( client->clientServer)
 		Port ClientRequestPort =  CCSFactoryImpl.eINSTANCE.createPort();
-		ClientRequestPort.setMode(Mode.REQUIRED);
-		this.icomponentelement.add(ClientRequestPort);
-		
 		//init communication port (server->client) 
 		Port ClientResponsePort = CCSFactoryImpl.eINSTANCE.createPort();
+		
+		send_request.setMode(Mode.OFFERED);
+		ClientRequestPort.setMode(Mode.REQUIRED);
 		ClientResponsePort.setMode(Mode.OFFERED);
+		
+		this.icomponentelement.add(send_request);
 		this.icomponentelement.add(ClientResponsePort);
-				
+		this.icomponentelement.add(ClientRequestPort);
 	}
 
 	/* return port by given name */
-	@SuppressWarnings("incomplete-switch")
 	public Port getPortByName(PortName name) {
 		switch (name) {
 		case send_request : return (Port) icomponentelement.get(0);

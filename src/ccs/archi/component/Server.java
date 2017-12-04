@@ -16,22 +16,24 @@ public class Server extends ComponentImpl {
 	}
 	
 	public Server() {
-		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
-		receive_request.setMode(Mode.REQUIRED);
-		
-		Port serverRequestRedirectPort =  CCSFactoryImpl.eINSTANCE.createPort();
-		serverRequestRedirectPort.setMode(Mode.OFFERED);
-		
-		Port responseFromDetailPort = CCSFactoryImpl.eINSTANCE.createPort();
-		responseFromDetailPort.setMode(Mode.REQUIRED);
-		
-		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();
-		responseToClientPort.setMode(Mode.OFFERED);
-		
+
 		this.configuration = new ServerDetail();
+		
+		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
+		Port serverRequestRedirectPort =  CCSFactoryImpl.eINSTANCE.createPort();
+		Port responseFromDetailPort = CCSFactoryImpl.eINSTANCE.createPort();
+		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();
+		
+		receive_request.setMode(Mode.REQUIRED);
+		serverRequestRedirectPort.setMode(Mode.OFFERED);
+		responseFromDetailPort.setMode(Mode.REQUIRED);
+		responseToClientPort.setMode(Mode.OFFERED);
+	
 		
 		this.icomponentelement.add(receive_request);
 		this.icomponentelement.add(serverRequestRedirectPort);
+		this.icomponentelement.add(responseFromDetailPort);
+		this.icomponentelement.add(responseToClientPort);
 	}
 	
 	public Port GetPortByName(PortName name) {
