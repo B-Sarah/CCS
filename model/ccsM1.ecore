@@ -13,6 +13,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="serverrequestredirectport"
         eType="#//ServerRequestRedirectPort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="receive_response" eType="#//Receive_Response"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsefromdetailport"
+        eType="#//ResponseFromDetailPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClientServer" eSuperTypes="cCS.ecore#//Configuration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="server" lowerBound="1"
@@ -35,6 +37,8 @@
         eType="#//ConnectionToSecurityPort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontodatabaseport"
         eType="#//ConnectionToDatabasePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connexionmanagerresponseport"
+        eType="#//ConnexionManagerResponsePort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SecurityManager" eSuperTypes="cCS.ecore#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="securitytoconnectionport"
@@ -49,6 +53,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="detailrequestport" eType="#//DetailRequestPort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="detailtoconnectionport"
         eType="#//DetailToConnectionPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailresponseport" eType="#//DetailResponsePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontodetailport"
+        eType="#//ConnectionToDetailPort"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Database" eSuperTypes="cCS.ecore#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="databasetoconnectionport"
@@ -186,4 +193,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="request_response" eType="#//Request_Response"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Request_Response"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResponseFromDetailPort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DetailResponsePort" eSuperTypes="cCS.ecore#//PortConfiguration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BindDetailToServer" eSuperTypes="cCS.ecore#//Binding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="detailresponseport" eType="#//DetailResponsePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsefromdetailport"
+        eType="#//ResponseFromDetailPort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionToDetailPort" eSuperTypes="cCS.ecore#//PortConfiguration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnexionManagerResponsePort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BindServerDetailToConnection" eSuperTypes="cCS.ecore#//Binding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connexionmanagerresponseport"
+        eType="#//ConnexionManagerResponsePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectiontodetailport"
+        eType="#//ConnectionToDetailPort"/>
+  </eClassifiers>
 </ecore:EPackage>
