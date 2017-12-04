@@ -1,4 +1,4 @@
-package configuration;
+package ccs.archi.configuration;
 
 import ccsM2.impl.ConfigurationImpl;
 
