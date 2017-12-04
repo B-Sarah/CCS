@@ -5,7 +5,7 @@ import ccsM2.impl.ComponentImpl;
 public class Database extends ComponentImpl {
 
 	public Database() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

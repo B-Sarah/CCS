@@ -10,14 +10,23 @@ public class Server extends ComponentImpl {
 	
 	public enum PortName{
 		receive_request,
-		serverRequestRedirectPort 
+		serverRequestRedirectPort,
+		responseFromDetailPort,
+		responseToClientPort
 	}
 	
 	public Server() {
 		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
 		receive_request.setMode(Mode.REQUIRED);
+		
 		Port serverRequestRedirectPort =  CCSFactoryImpl.eINSTANCE.createPort();
 		serverRequestRedirectPort.setMode(Mode.OFFERED);
+		
+		Port responseFromDetailPort = CCSFactoryImpl.eINSTANCE.createPort();
+		responseFromDetailPort.setMode(Mode.REQUIRED);
+		
+		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();
+		responseToClientPort.setMode(Mode.OFFERED);
 		
 		this.configuration = new ServerDetail();
 		
