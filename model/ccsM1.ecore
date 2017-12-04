@@ -4,12 +4,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="Client" eSuperTypes="cCS.ecore#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="send_request" eType="#//Send_Request"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="clientrequestport" eType="#//ClientRequestPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientresponseport" eType="#//ClientResponsePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="request_response" eType="#//Request_Response"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Server" eSuperTypes="cCS.ecore#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="serverdetail" eType="#//ServerDetail"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="receive_request" eType="#//Receive_Request"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="serverrequestredirectport"
         eType="#//ServerRequestRedirectPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receive_response" eType="#//Receive_Response"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClientServer" eSuperTypes="cCS.ecore#//Configuration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="server" lowerBound="1"
@@ -20,6 +23,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="attachfromclient" eType="#//AttachFromClient"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attachtoserver" eType="#//AttachToServer"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="clientserverport" eType="#//ClientServerPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientserverresponseport"
+        eType="#//ClientServerResponsePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachserverresponse" eType="#//AttachServerResponse"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachrpcresponse" eType="#//AttachRPCResponse"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionManager" eSuperTypes="cCS.ecore#//Component">
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectionmanagerrequestport"
@@ -53,6 +60,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="caller" eType="#//Called"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="called" eType="#//Caller"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="communicationglue" eType="#//CommunicationGlue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calledresponse" eType="#//CalledResponse"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callerresponse" eType="#//CallerResponse"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Called" eSuperTypes="cCS.ecore#//Role"/>
   <eClassifiers xsi:type="ecore:EClass" name="Caller" eSuperTypes="cCS.ecore#//Role"/>
@@ -97,7 +106,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClientRequestPort" eSuperTypes="cCS.ecore#//Port"/>
   <eClassifiers xsi:type="ecore:EClass" name="NewEClass23"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BindRequestToClient">
+  <eClassifiers xsi:type="ecore:EClass" name="BindRequestToClient" eSuperTypes="cCS.ecore#//Binding">
     <eStructuralFeatures xsi:type="ecore:EReference" name="clientrequestport" eType="#//ClientRequestPort"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="clientserverport" eType="#//ClientServerPort"/>
   </eClassifiers>
@@ -158,4 +167,23 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="databasetosecurityrole"
         eType="#//DatabaseToSecurityRole"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClientResponsePort" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClientServerResponsePort" eSuperTypes="cCS.ecore#//PortConfiguration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BindClientToRequest" eSuperTypes="cCS.ecore#//Binding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientresponseport" eType="#//ClientResponsePort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientserverresponseport"
+        eType="#//ClientServerResponsePort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalledResponse" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CallerResponse" eSuperTypes="cCS.ecore#//Role"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Receive_Response" eSuperTypes="cCS.ecore#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachServerResponse" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receive_response" eType="#//Receive_Response"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calledresponse" eType="#//CalledResponse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttachRPCResponse" eSuperTypes="cCS.ecore#//Attachement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callerresponse" eType="#//CallerResponse"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="request_response" eType="#//Request_Response"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Request_Response"/>
 </ecore:EPackage>
