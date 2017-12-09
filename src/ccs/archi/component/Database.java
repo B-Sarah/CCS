@@ -1,12 +1,17 @@
 package ccs.archi.component;
 
+import java.util.Map;
+
 import ccs.archi.interfaces.ICommonElement;
+import ccs.archi.repository.User;
 import ccsM2.Mode;
 import ccsM2.Port;
 import ccsM2.impl.CCSFactoryImpl;
 import ccsM2.impl.ComponentImpl;
 
 public class Database extends ComponentImpl implements ICommonElement {
+	
+	private Map<String,User> usersInformations;
 
 	public enum PortName {
 		databaseToSecurityPort, databaseToConnectionPort,responseFromSecurityPort,responseFromConnectionPort
@@ -33,5 +38,7 @@ public class Database extends ComponentImpl implements ICommonElement {
 		this.icomponentelement.add(responseFromSecurityPort);
 		this.icomponentelement.add(responseFromConnectionPort);
 	}
+	 
+	 
 
 }
