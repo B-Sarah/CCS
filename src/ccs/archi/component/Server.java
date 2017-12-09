@@ -10,38 +10,47 @@ public class Server extends ComponentImpl {
 	
 	public enum PortName{
 		receive_request,
+		responseToClientPort,
 		serverRequestRedirectPort,
-		responseFromDetailPort,
-		responseToClientPort
+		responseFromDetailPort
+		
 	}
 	
 	public Server() {
 
 		this.configuration = new ServerDetail();
 		
+		/* Ports setup for client communication */ 
 		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
-		Port serverRequestRedirectPort =  CCSFactoryImpl.eINSTANCE.createPort();
-		Port responseFromDetailPort = CCSFactoryImpl.eINSTANCE.createPort();
 		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();
 		
 		receive_request.setMode(Mode.REQUIRED);
-		serverRequestRedirectPort.setMode(Mode.OFFERED);
-		responseFromDetailPort.setMode(Mode.REQUIRED);
 		responseToClientPort.setMode(Mode.OFFERED);
 	
-		
 		this.icomponentelement.add(receive_request);
+		this.icomponentelement.add(responseToClientPort);
+		
+		/* Ports setup for detail communication */
+		Port serverRequestRedirectPort =  CCSFactoryImpl.eINSTANCE.createPort();
+		Port responseFromDetailPort = CCSFactoryImpl.eINSTANCE.createPort();
+		
+		serverRequestRedirectPort.setMode(Mode.OFFERED);
+		responseFromDetailPort.setMode(Mode.REQUIRED);
+		
 		this.icomponentelement.add(serverRequestRedirectPort);
 		this.icomponentelement.add(responseFromDetailPort);
-		this.icomponentelement.add(responseToClientPort);
 	}
 	
 	public Port GetPortByName(PortName name) {
 		switch(name) {
 		case receive_request:
 			return (Port)this.icomponentelement.get(0);
-		case serverRequestRedirectPort:
+		case responseToClientPort:
 			return (Port)this.icomponentelement.get(1);
+		case serverRequestRedirectPort:
+			return (Port)this.icomponentelement.get(2);
+		case responseFromDetailPort:
+			return (Port)this.icomponentelement.get(3);
 		}
 		return null;
 	}
