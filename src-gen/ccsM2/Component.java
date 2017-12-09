@@ -64,5 +64,7 @@ public interface Component extends EObject {
 	 * @generated
 	 */
 	EList<IComponentElement> getIcomponentelement();
+	
+	public void SetInterfaceValue(IComponentElement element, Object value);
 
 } // Component

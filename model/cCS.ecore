@@ -47,6 +47,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//Mode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//Visibility"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containedValue" eType="#//ElementValue"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PortConfiguration" eSuperTypes="#//InterfaceElement"/>
   <eClassifiers xsi:type="ecore:EEnum" name="Mode">
@@ -58,4 +59,5 @@
     <eLiterals name="PUBLIC" value="1"/>
     <eLiterals name="PROTECTED" value="2"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ElementValue" instanceTypeName="newDataType3"/>
 </ecore:EPackage>

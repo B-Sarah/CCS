@@ -1,19 +1,24 @@
 package ccs.archi.component;
 
 import ccs.archi.configuration.ServerDetail;
-import ccsM2.Configuration;
+import ccs.archi.interfaces.IObservable;
+import ccs.archi.interfaces.IObserver;
+import ccsM2.IComponentElement;
+import ccsM2.InterfaceElement;
 import ccsM2.Mode;
 import ccsM2.Port;
-import ccsM2.impl.*;
+import ccsM2.impl.CCSFactoryImpl;
+import ccsM2.impl.ComponentImpl;
 
-public class Server extends ComponentImpl {
+public class Server extends ComponentImpl implements IObservable {
+	
+	private IObserver observer;
 	
 	public enum PortName{
 		receive_request,
 		responseToClientPort,
 		serverRequestRedirectPort,
 		responseFromDetailPort
-		
 	}
 	
 	public Server() {
@@ -41,6 +46,15 @@ public class Server extends ComponentImpl {
 		this.icomponentelement.add(responseFromDetailPort);
 	}
 	
+	@Override
+	public void SetInterfaceValue(IComponentElement element, Object value) {
+		super.SetInterfaceValue(element, value);
+		if(((InterfaceElement)element).getMode() == Mode.OFFERED)
+			NotifyObserver((InterfaceElement)element);
+		else
+			Work(element);
+	}
+	
 	public Port GetPortByName(PortName name) {
 		switch(name) {
 		case receive_request:
@@ -53,6 +67,17 @@ public class Server extends ComponentImpl {
 			return (Port)this.icomponentelement.get(3);
 		}
 		return null;
+	}
+
+	@Override
+	public void NotifyObserver(InterfaceElement elementChanged) {
+		this.observer.ReceivedNotification(elementChanged);
+	}
+
+	@Override
+	public void SetObserver(IObserver anObserver) {
+		this.observer = anObserver;
+		this.observer.AddObservable(this);
 	}
 
 }

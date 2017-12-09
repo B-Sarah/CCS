@@ -17,6 +17,7 @@
       <genEnumLiterals ecoreEnumLiteral="cCS.ecore#//Visibility/PUBLIC"/>
       <genEnumLiterals ecoreEnumLiteral="cCS.ecore#//Visibility/PROTECTED"/>
     </genEnums>
+    <genDataTypes ecoreDataType="cCS.ecore#//ElementValue"/>
     <genClasses ecoreClass="cCS.ecore#//Configuration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Configuration/connector"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference cCS.ecore#//Configuration/component"/>
@@ -48,6 +49,7 @@
     <genClasses ecoreClass="cCS.ecore#//InterfaceElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cCS.ecore#//InterfaceElement/mode"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cCS.ecore#//InterfaceElement/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute cCS.ecore#//InterfaceElement/containedValue"/>
       <genOperations ecoreOperation="cCS.ecore#//InterfaceElement/SetMode">
         <genParameters ecoreParameter="cCS.ecore#//InterfaceElement/SetMode/mode"/>
       </genOperations>

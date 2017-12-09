@@ -2,12 +2,17 @@
  */
 package ccsM2.impl;
 
+import ccsM2.Attachement;
 import ccsM2.CCSPackage;
 import ccsM2.Component;
 import ccsM2.Configuration;
 import ccsM2.Connector;
+import ccsM2.IComponentElement;
 import ccsM2.ILink;
+import ccsM2.InterfaceElement;
+import ccsM2.Port;
 import ccsM2.PortConfiguration;
+import ccsM2.Role;
 
 import java.util.Collection;
 
@@ -261,6 +266,36 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 			return ilink != null && !ilink.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	protected Attachement GetAttachementFromElement(InterfaceElement element) {
+		
+		//Iterate over all attachements of configuration
+		//to find one that has port as a connection
+		for(ILink aLink  : this.ilink) {
+			if(aLink instanceof Attachement) {
+				if(((Attachement)aLink).getIcomponentelement() == element || 
+						((Attachement)aLink).getRole() == element) {
+					return (Attachement)aLink;
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	protected Component GetComponentContainingElement(IComponentElement element) {
+		for(Component c : this.component) {
+			if(c.getIcomponentelement().contains(element)) return c;
+		}
+		return null;
+	}
+	
+	protected Connector GetConnectorContainingRole(Role element) {
+		for(Connector c : this.connector) {
+			if(c.getRole().contains(element)) return c;
+		}
+		return null;
 	}
 
 } //ConfigurationImpl

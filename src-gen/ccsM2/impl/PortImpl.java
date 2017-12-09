@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <ul>
  *   <li>{@link ccsM2.impl.PortImpl#getMode <em>Mode</em>}</li>
  *   <li>{@link ccsM2.impl.PortImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link ccsM2.impl.PortImpl#getContainedValue <em>Contained Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -73,6 +74,16 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 	 * @ordered
 	 */
 	protected Visibility visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getContainedValue() <em>Contained Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainedValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object containedValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -141,6 +152,28 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Object getContainedValue() {
+		return containedValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContainedValue(Object newContainedValue) {
+		Object oldContainedValue = containedValue;
+		containedValue = newContainedValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CCSPackage.PORT__CONTAINED_VALUE, oldContainedValue,
+					containedValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void SetMode(Mode mode) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -170,6 +203,8 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 			return getMode();
 		case CCSPackage.PORT__VISIBILITY:
 			return getVisibility();
+		case CCSPackage.PORT__CONTAINED_VALUE:
+			return getContainedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -187,6 +222,9 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 			return;
 		case CCSPackage.PORT__VISIBILITY:
 			setVisibility((Visibility) newValue);
+			return;
+		case CCSPackage.PORT__CONTAINED_VALUE:
+			setContainedValue(newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -206,6 +244,9 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 		case CCSPackage.PORT__VISIBILITY:
 			setVisibility(VISIBILITY_EDEFAULT);
 			return;
+		case CCSPackage.PORT__CONTAINED_VALUE:
+			setContainedValue((Object) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -222,6 +263,8 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 			return mode != MODE_EDEFAULT;
 		case CCSPackage.PORT__VISIBILITY:
 			return visibility != VISIBILITY_EDEFAULT;
+		case CCSPackage.PORT__CONTAINED_VALUE:
+			return containedValue != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -239,6 +282,8 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 				return CCSPackage.INTERFACE_ELEMENT__MODE;
 			case CCSPackage.PORT__VISIBILITY:
 				return CCSPackage.INTERFACE_ELEMENT__VISIBILITY;
+			case CCSPackage.PORT__CONTAINED_VALUE:
+				return CCSPackage.INTERFACE_ELEMENT__CONTAINED_VALUE;
 			default:
 				return -1;
 			}
@@ -259,6 +304,8 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 				return CCSPackage.PORT__MODE;
 			case CCSPackage.INTERFACE_ELEMENT__VISIBILITY:
 				return CCSPackage.PORT__VISIBILITY;
+			case CCSPackage.INTERFACE_ELEMENT__CONTAINED_VALUE:
+				return CCSPackage.PORT__CONTAINED_VALUE;
 			default:
 				return -1;
 			}
@@ -319,6 +366,8 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 		result.append(mode);
 		result.append(", visibility: ");
 		result.append(visibility);
+		result.append(", containedValue: ");
+		result.append(containedValue);
 		result.append(')');
 		return result.toString();
 	}

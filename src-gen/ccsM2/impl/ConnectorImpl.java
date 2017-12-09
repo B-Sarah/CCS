@@ -5,6 +5,8 @@ package ccsM2.impl;
 import ccsM2.CCSPackage;
 import ccsM2.Connector;
 import ccsM2.Glue;
+import ccsM2.IComponentElement;
+import ccsM2.InterfaceElement;
 import ccsM2.Role;
 
 import java.util.Collection;
@@ -212,6 +214,18 @@ public class ConnectorImpl extends MinimalEObjectImpl.Container implements Conne
 			return role != null && !role.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	public void SetRoleValue(Role element, Object value) {
+		this.role.get(this.role.indexOf(element)).setContainedValue(value);
+	}
+	
+	public Object GetRoleValue(Role element) {
+		return this.role.get(this.role.indexOf(element)).getContainedValue();
+	}
+	
+	protected void Work(Role changedInput) {
+		
 	}
 
 } //ConnectorImpl

@@ -65,5 +65,7 @@ public interface Connector extends EObject {
 	 * @generated
 	 */
 	EList<Role> getRole();
+	
+	public void SetRoleValue(Role element, Object value);
 
 } // Connector

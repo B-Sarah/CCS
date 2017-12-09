@@ -1,19 +1,23 @@
 package ccs.archi.component;
 
+import ccs.archi.interfaces.IObservable;
+import ccs.archi.interfaces.IObserver;
+import ccsM2.IComponentElement;
+import ccsM2.InterfaceElement;
 import ccsM2.Mode;
 import ccsM2.Port;
 import ccsM2.impl.CCSFactoryImpl;
 import ccsM2.impl.ComponentImpl;
 
-public class Client extends ComponentImpl {
+public class Client extends ComponentImpl implements IObservable{
 	
+	private IObserver observer;
 
 	public enum PortName{
 		send_request,
 		request_response,
 		ClientRequestPort,
 		ClientResponsePort
-		
 	}
 	
 
@@ -51,5 +55,25 @@ public class Client extends ComponentImpl {
 		case ClientResponsePort : return (Port) icomponentelement.get(3);
 		}
 		return null;
+	}
+	
+	@Override
+	public void SetInterfaceValue(IComponentElement element, Object value) {
+		super.SetInterfaceValue(element, value);
+		if(((InterfaceElement)element).getMode() == Mode.OFFERED)
+			NotifyObserver((InterfaceElement)element);
+		else
+			Work(element);
+	}
+
+	@Override
+	public void NotifyObserver(InterfaceElement elementChanged) {
+		this.observer.ReceivedNotification(elementChanged);
+	}
+
+	@Override
+	public void SetObserver(IObserver anObserver) {
+		this.observer = anObserver;
+		this.observer.AddObservable(this);
 	}
 }

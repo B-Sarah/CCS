@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link ccsM2.InterfaceElement#getMode <em>Mode</em>}</li>
  *   <li>{@link ccsM2.InterfaceElement#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link ccsM2.InterfaceElement#getContainedValue <em>Contained Value</em>}</li>
  * </ul>
  *
  * @see ccsM2.CCSPackage#getInterfaceElement()
@@ -79,6 +80,32 @@ public interface InterfaceElement extends EObject {
 	 * @generated
 	 */
 	void setVisibility(Visibility value);
+
+	/**
+	 * Returns the value of the '<em><b>Contained Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Contained Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Contained Value</em>' attribute.
+	 * @see #setContainedValue(Object)
+	 * @see ccsM2.CCSPackage#getInterfaceElement_ContainedValue()
+	 * @model dataType="ccsM2.ElementValue"
+	 * @generated
+	 */
+	Object getContainedValue();
+
+	/**
+	 * Sets the value of the '{@link ccsM2.InterfaceElement#getContainedValue <em>Contained Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Contained Value</em>' attribute.
+	 * @see #getContainedValue()
+	 * @generated
+	 */
+	void setContainedValue(Object value);
 
 	/**
 	 * <!-- begin-user-doc -->

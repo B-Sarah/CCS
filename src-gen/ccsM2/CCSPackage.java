@@ -4,6 +4,7 @@ package ccsM2;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -243,13 +244,22 @@ public interface CCSPackage extends EPackage {
 	int INTERFACE_ELEMENT__VISIBILITY = 1;
 
 	/**
+	 * The feature id for the '<em><b>Contained Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_ELEMENT__CONTAINED_VALUE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Interface Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_ELEMENT_FEATURE_COUNT = 2;
+	int INTERFACE_ELEMENT_FEATURE_COUNT = 3;
 
 	/**
 	 * The operation id for the '<em>Set Mode</em>' operation.
@@ -305,6 +315,15 @@ public interface CCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int ROLE__VISIBILITY = INTERFACE_ELEMENT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Contained Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__CONTAINED_VALUE = INTERFACE_ELEMENT__CONTAINED_VALUE;
 
 	/**
 	 * The number of structural features of the '<em>Role</em>' class.
@@ -399,13 +418,22 @@ public interface CCSPackage extends EPackage {
 	int PORT__VISIBILITY = ICOMPONENT_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Contained Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT__CONTAINED_VALUE = ICOMPONENT_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Port</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PORT_FEATURE_COUNT = ICOMPONENT_ELEMENT_FEATURE_COUNT + 2;
+	int PORT_FEATURE_COUNT = ICOMPONENT_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Set Mode</em>' operation.
@@ -583,13 +611,22 @@ public interface CCSPackage extends EPackage {
 	int SERVICE__VISIBILITY = ICOMPONENT_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Contained Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__CONTAINED_VALUE = ICOMPONENT_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Service</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = ICOMPONENT_ELEMENT_FEATURE_COUNT + 2;
+	int SERVICE_FEATURE_COUNT = ICOMPONENT_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Set Mode</em>' operation.
@@ -675,6 +712,15 @@ public interface CCSPackage extends EPackage {
 	int PORT_CONFIGURATION__VISIBILITY = INTERFACE_ELEMENT__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>Contained Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_CONFIGURATION__CONTAINED_VALUE = INTERFACE_ELEMENT__CONTAINED_VALUE;
+
+	/**
 	 * The number of structural features of the '<em>Port Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -729,6 +775,16 @@ public interface CCSPackage extends EPackage {
 	 * @generated
 	 */
 	int VISIBILITY = 14;
+
+	/**
+	 * The meta object id for the '<em>Element Value</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.lang.Object
+	 * @see ccsM2.impl.CCSPackageImpl#getElementValue()
+	 * @generated
+	 */
+	int ELEMENT_VALUE = 15;
 
 	/**
 	 * Returns the meta object for class '{@link ccsM2.Configuration <em>Configuration</em>}'.
@@ -1005,6 +1061,17 @@ public interface CCSPackage extends EPackage {
 	EAttribute getInterfaceElement_Visibility();
 
 	/**
+	 * Returns the meta object for the attribute '{@link ccsM2.InterfaceElement#getContainedValue <em>Contained Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Contained Value</em>'.
+	 * @see ccsM2.InterfaceElement#getContainedValue()
+	 * @see #getInterfaceElement()
+	 * @generated
+	 */
+	EAttribute getInterfaceElement_ContainedValue();
+
+	/**
 	 * Returns the meta object for the '{@link ccsM2.InterfaceElement#SetMode(ccsM2.Mode) <em>Set Mode</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1053,6 +1120,17 @@ public interface CCSPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getVisibility();
+
+	/**
+	 * Returns the meta object for data type '{@link java.lang.Object <em>Element Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Element Value</em>'.
+	 * @see java.lang.Object
+	 * @model instanceClass="java.lang.Object"
+	 * @generated
+	 */
+	EDataType getElementValue();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1310,6 +1388,14 @@ public interface CCSPackage extends EPackage {
 		EAttribute INTERFACE_ELEMENT__VISIBILITY = eINSTANCE.getInterfaceElement_Visibility();
 
 		/**
+		 * The meta object literal for the '<em><b>Contained Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTERFACE_ELEMENT__CONTAINED_VALUE = eINSTANCE.getInterfaceElement_ContainedValue();
+
+		/**
 		 * The meta object literal for the '<em><b>Set Mode</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1355,6 +1441,16 @@ public interface CCSPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum VISIBILITY = eINSTANCE.getVisibility();
+
+		/**
+		 * The meta object literal for the '<em>Element Value</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.Object
+		 * @see ccsM2.impl.CCSPackageImpl#getElementValue()
+		 * @generated
+		 */
+		EDataType ELEMENT_VALUE = eINSTANCE.getElementValue();
 
 	}
 

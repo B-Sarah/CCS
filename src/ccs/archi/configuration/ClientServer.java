@@ -1,17 +1,22 @@
 package ccs.archi.configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ccs.archi.component.Client;
 import ccs.archi.component.Server;
 import ccs.archi.connector.RPC;
+import ccs.archi.interfaces.IObservable;
+import ccs.archi.interfaces.IObserver;
 import ccsM2.Attachement;
-import ccsM2.ILink;
-import ccsM2.Port;
+import ccsM2.InterfaceElement;
+import ccsM2.Mode;
 import ccsM2.impl.CCSFactoryImpl;
 import ccsM2.impl.ConfigurationImpl;
 
-public class ClientServer extends ConfigurationImpl {
+public class ClientServer extends ConfigurationImpl implements IObserver {
 	
-	
+	private List<IObservable> observables = new ArrayList<IObservable>();
 
 	public ClientServer() {
 		Server server = new Server();
@@ -62,6 +67,26 @@ public class ClientServer extends ConfigurationImpl {
 		this.ilink.add(rpcToClient);
 		
 		return newClient;
+	}
+
+	@Override
+	public List<IObservable> AddObservable(IObservable anObservable) {
+		if(!this.observables.contains(anObservable))
+			this.observables.add(anObservable);
+		return this.observables;
+	}
+
+	@Override
+	public void ReceivedNotification(InterfaceElement notifier) {
+		//retrieve attachement linked to notifier
+		Attachement linker = this.GetAttachementFromElement(notifier);
+		//case we need to redirect to component 
+		if(linker.getRole() == notifier) {
+			GetComponentContainingElement(linker.getIcomponentelement()).
+			SetInterfaceValue(linker.getIcomponentelement(), notifier.getContainedValue());
+		} else {
+			GetConnectorContainingRole(linker.getRole()).SetRoleValue(linker.getRole(), notifier.getContainedValue());
+		}
 	}
 	
 	

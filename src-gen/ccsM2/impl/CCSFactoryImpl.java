@@ -95,6 +95,8 @@ public class CCSFactoryImpl extends EFactoryImpl implements CCSFactory {
 			return createModeFromString(eDataType, initialValue);
 		case CCSPackage.VISIBILITY:
 			return createVisibilityFromString(eDataType, initialValue);
+		case CCSPackage.ELEMENT_VALUE:
+			return createElementValueFromString(eDataType, initialValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -112,6 +114,8 @@ public class CCSFactoryImpl extends EFactoryImpl implements CCSFactory {
 			return convertModeToString(eDataType, instanceValue);
 		case CCSPackage.VISIBILITY:
 			return convertVisibilityToString(eDataType, instanceValue);
+		case CCSPackage.ELEMENT_VALUE:
+			return convertElementValueToString(eDataType, instanceValue);
 		default:
 			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -269,6 +273,24 @@ public class CCSFactoryImpl extends EFactoryImpl implements CCSFactory {
 	 */
 	public String convertVisibilityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object createElementValueFromString(EDataType eDataType, String initialValue) {
+		return super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertElementValueToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

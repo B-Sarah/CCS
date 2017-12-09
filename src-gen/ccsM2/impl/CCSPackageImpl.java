@@ -22,6 +22,7 @@ import ccsM2.Visibility;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -140,6 +141,13 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 	 * @generated
 	 */
 	private EEnum visibilityEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType elementValueEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -443,6 +451,15 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getInterfaceElement_ContainedValue() {
+		return (EAttribute) interfaceElementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getInterfaceElement__SetMode__Mode() {
 		return interfaceElementEClass.getEOperations().get(0);
 	}
@@ -481,6 +498,15 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 	 */
 	public EEnum getVisibility() {
 		return visibilityEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getElementValue() {
+		return elementValueEDataType;
 	}
 
 	/**
@@ -549,6 +575,7 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 		interfaceElementEClass = createEClass(INTERFACE_ELEMENT);
 		createEAttribute(interfaceElementEClass, INTERFACE_ELEMENT__MODE);
 		createEAttribute(interfaceElementEClass, INTERFACE_ELEMENT__VISIBILITY);
+		createEAttribute(interfaceElementEClass, INTERFACE_ELEMENT__CONTAINED_VALUE);
 		createEOperation(interfaceElementEClass, INTERFACE_ELEMENT___SET_MODE__MODE);
 		createEOperation(interfaceElementEClass, INTERFACE_ELEMENT___SET_VISIBILITY__VISIBILITY);
 
@@ -557,6 +584,9 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 		// Create enums
 		modeEEnum = createEEnum(MODE);
 		visibilityEEnum = createEEnum(VISIBILITY);
+
+		// Create data types
+		elementValueEDataType = createEDataType(ELEMENT_VALUE);
 	}
 
 	/**
@@ -668,6 +698,9 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 		initEAttribute(getInterfaceElement_Visibility(), this.getVisibility(), "visibility", null, 0, 1,
 				InterfaceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInterfaceElement_ContainedValue(), this.getElementValue(), "containedValue", null, 0, 1,
+				InterfaceElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
+				!IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getInterfaceElement__SetMode__Mode(), null, "SetMode", 0, 1, IS_UNIQUE,
 				IS_ORDERED);
@@ -689,6 +722,10 @@ public class CCSPackageImpl extends EPackageImpl implements CCSPackage {
 		addEEnumLiteral(visibilityEEnum, Visibility.PRIVATE);
 		addEEnumLiteral(visibilityEEnum, Visibility.PUBLIC);
 		addEEnumLiteral(visibilityEEnum, Visibility.PROTECTED);
+
+		// Initialize data types
+		initEDataType(elementValueEDataType, Object.class, "ElementValue", IS_SERIALIZABLE,
+				!IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

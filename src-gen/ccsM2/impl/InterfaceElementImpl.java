@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <ul>
  *   <li>{@link ccsM2.impl.InterfaceElementImpl#getMode <em>Mode</em>}</li>
  *   <li>{@link ccsM2.impl.InterfaceElementImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link ccsM2.impl.InterfaceElementImpl#getContainedValue <em>Contained Value</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,6 +73,16 @@ public class InterfaceElementImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected Visibility visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getContainedValue() <em>Contained Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContainedValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected Object containedValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,6 +151,28 @@ public class InterfaceElementImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Object getContainedValue() {
+		return containedValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContainedValue(Object newContainedValue) {
+		Object oldContainedValue = containedValue;
+		containedValue = newContainedValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CCSPackage.INTERFACE_ELEMENT__CONTAINED_VALUE,
+					oldContainedValue, containedValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void SetMode(Mode mode) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -169,6 +202,8 @@ public class InterfaceElementImpl extends MinimalEObjectImpl.Container implement
 			return getMode();
 		case CCSPackage.INTERFACE_ELEMENT__VISIBILITY:
 			return getVisibility();
+		case CCSPackage.INTERFACE_ELEMENT__CONTAINED_VALUE:
+			return getContainedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -186,6 +221,9 @@ public class InterfaceElementImpl extends MinimalEObjectImpl.Container implement
 			return;
 		case CCSPackage.INTERFACE_ELEMENT__VISIBILITY:
 			setVisibility((Visibility) newValue);
+			return;
+		case CCSPackage.INTERFACE_ELEMENT__CONTAINED_VALUE:
+			setContainedValue(newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -205,6 +243,9 @@ public class InterfaceElementImpl extends MinimalEObjectImpl.Container implement
 		case CCSPackage.INTERFACE_ELEMENT__VISIBILITY:
 			setVisibility(VISIBILITY_EDEFAULT);
 			return;
+		case CCSPackage.INTERFACE_ELEMENT__CONTAINED_VALUE:
+			setContainedValue((Object) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -221,6 +262,8 @@ public class InterfaceElementImpl extends MinimalEObjectImpl.Container implement
 			return mode != MODE_EDEFAULT;
 		case CCSPackage.INTERFACE_ELEMENT__VISIBILITY:
 			return visibility != VISIBILITY_EDEFAULT;
+		case CCSPackage.INTERFACE_ELEMENT__CONTAINED_VALUE:
+			return containedValue != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -258,6 +301,8 @@ public class InterfaceElementImpl extends MinimalEObjectImpl.Container implement
 		result.append(mode);
 		result.append(", visibility: ");
 		result.append(visibility);
+		result.append(", containedValue: ");
+		result.append(containedValue);
 		result.append(')');
 		return result.toString();
 	}

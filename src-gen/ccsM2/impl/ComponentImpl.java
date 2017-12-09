@@ -7,6 +7,8 @@ import ccsM2.Component;
 import ccsM2.Configuration;
 
 import ccsM2.IComponentElement;
+import ccsM2.InterfaceElement;
+
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -19,6 +21,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import ccs.archi.component.Client.PortName;
 
 /**
  * <!-- begin-user-doc -->
@@ -221,6 +225,19 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 			return icomponentelement != null && !icomponentelement.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	
+	public void SetInterfaceValue(IComponentElement element, Object value) {
+		((InterfaceElement)this.icomponentelement.get(this.icomponentelement.indexOf(element))).setContainedValue(value);
+	}
+	
+	public Object GetInterfaceValue(IComponentElement element) {
+		return ((InterfaceElement)this.icomponentelement.get(this.icomponentelement.indexOf(element))).getContainedValue();
+	}
+	
+	protected void Work(IComponentElement changedInput) {
+		
 	}
 
 } //ComponentImpl
