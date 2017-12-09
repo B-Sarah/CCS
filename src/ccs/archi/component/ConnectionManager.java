@@ -17,6 +17,11 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement{
 		initPort();
 
 	}
+	
+	//public void redirectRequest(String request) {
+		
+	//}
+	
 
 	 public void initPort() {
 		Port connectionRequestPort = CCSFactory.eINSTANCE.createPort();
