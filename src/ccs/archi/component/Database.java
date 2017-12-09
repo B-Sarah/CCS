@@ -17,7 +17,7 @@ public class Database extends ComponentImpl implements ICommonElement {
 		initPort();
 	}
 
-	private void initPort() {
+	 public void initPort() {
 		Port databaseToSecurityPort = CCSFactoryImpl.eINSTANCE.createPort();
 		Port databaseToConnectionPort = CCSFactoryImpl.eINSTANCE.createPort();
 		Port responseFromSecurityPort = CCSFactoryImpl.eINSTANCE.createPort();
