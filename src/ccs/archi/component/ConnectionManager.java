@@ -25,7 +25,7 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement, 
 	}
 
 	public enum PortName {
-		connectionRequestPort, connectionResponsePort, connectionToSecurity, connectionToDatabase, responseFromDatabasePort, responseFromSecurityPort
+		connectionRequestPort, connectionResponsePort, connectionToSecurityPort, connectionToDatabasePort, responseFromDatabasePort, responseFromSecurityPort
 
 	}
 
@@ -40,30 +40,30 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement, 
 	public void initElements() {
 		Port connectionRequestPort = CCSFactory.eINSTANCE.createPort();
 		Port connectionResponsePort = CCSFactory.eINSTANCE.createPort();
-		Port connectionToSecurity = CCSFactory.eINSTANCE.createPort();
-		Port connectionToDatabase = CCSFactory.eINSTANCE.createPort();
+		Port connectionToSecurityPort = CCSFactory.eINSTANCE.createPort();
+		Port connectionToDatabasePort = CCSFactory.eINSTANCE.createPort();
 		Port responseFromDatabasePort = CCSFactory.eINSTANCE.createPort();
 		Port responseFromSecurityPort = CCSFactory.eINSTANCE.createPort();
 
 		connectionRequestPort.setMode(Mode.REQUIRED);
 		connectionResponsePort.setMode(Mode.OFFERED);
-		connectionToDatabase.setMode(Mode.OFFERED);
-		connectionToSecurity.SetMode(Mode.OFFERED);
+		connectionToDatabasePort.setMode(Mode.OFFERED);
+		connectionToSecurityPort.SetMode(Mode.OFFERED);
 		responseFromDatabasePort.SetMode(Mode.REQUIRED);
 		responseFromSecurityPort.setMode(Mode.REQUIRED);
 		
 
 		connectionRequestPort.SetName("connectionRequestPort");
 		connectionResponsePort.SetName("connectionResponsePort");
-		connectionToDatabase.SetName("connectionToDatabase");
-		connectionToSecurity.SetName("connectionToSecurity");
+		connectionToDatabasePort.SetName("connectionToDatabasePort");
+		connectionToSecurityPort.SetName("connectionToSecurityPort");
 		responseFromDatabasePort.SetName("responseFromDatabasePort");
 		responseFromSecurityPort.SetName("responseFromSecurityPort");
 
 		this.icomponentelement.add(connectionRequestPort);
 		this.icomponentelement.add(connectionResponsePort);
-		this.icomponentelement.add(connectionToDatabase);
-		this.icomponentelement.add(connectionToSecurity);
+		this.icomponentelement.add(connectionToDatabasePort);
+		this.icomponentelement.add(connectionToSecurityPort);
 		this.icomponentelement.add(responseFromSecurityPort);
 		this.icomponentelement.add(responseFromDatabasePort);
 	}
@@ -98,11 +98,11 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement, 
 		if (changedInput == getPortByName(PortName.connectionRequestPort)) {
 			switch (checkRequestType((String) changedElementValue)) {
 			case Login:
-				SetComponentElementValue(getPortByName(PortName.connectionToSecurity), changedElementValue);
+				SetComponentElementValue(getPortByName(PortName.connectionToSecurityPort), changedElementValue);
 			case Failure:
 				SetComponentElementValue(getPortByName(PortName.connectionResponsePort), "failure");
 			case UserInfos:
-				SetComponentElementValue(getPortByName(PortName.connectionToDatabase), changedElementValue);
+				SetComponentElementValue(getPortByName(PortName.connectionToDatabasePort), changedElementValue);
 
 			case Logout:
 				if (connectedUsers.containsKey((String) changedElementValue)) {
@@ -154,9 +154,9 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement, 
 			return (Port) icomponentelement.get(0);
 		case connectionResponsePort:
 			return (Port) icomponentelement.get(1);
-		case connectionToDatabase:
+		case connectionToDatabasePort:
 			return (Port) icomponentelement.get(2);
-		case connectionToSecurity:
+		case connectionToSecurityPort:
 			return (Port) icomponentelement.get(3);
 		case responseFromDatabasePort:
 			return (Port) icomponentelement.get(4);

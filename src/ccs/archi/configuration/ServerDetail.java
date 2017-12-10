@@ -20,6 +20,7 @@ import ccsM2.Component;
 import ccsM2.Connector;
 import ccsM2.ILink;
 import ccsM2.InterfaceElement;
+import ccsM2.Mode;
 import ccsM2.PortConfiguration;
 import ccsM2.impl.CCSFactoryImpl;
 import ccsM2.impl.ConfigurationImpl;
@@ -102,7 +103,7 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		Attachement connection_databaseToDatabase = CCSFactoryImpl.eINSTANCE.createAttachement();
 		
 		connectionToConnection_database.setIcomponentelement(((ConnectionManager)connectionManager).
-				getPortByName(ConnectionManager.PortName.connectionToDatabase));
+				getPortByName(ConnectionManager.PortName.connectionToDatabasePort));
 		connectionToConnection_database.setRole(((Connection_Database)connection_database).
 				GetRoleByName(Connection_Database.RoleName.fromConnection));
 		
@@ -130,21 +131,21 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		Attachement connection_SecurityToSecurity = CCSFactoryImpl.eINSTANCE.createAttachement();
 		
 		connectionToConnection_Security.setIcomponentelement(((ConnectionManager)connectionManager).
-				getPortByName(ConnectionManager.PortName.connectionToSecurity));
+				getPortByName(ConnectionManager.PortName.connectionToSecurityPort));
 		connectionToConnection_Security.setRole(((Connection_Security)connection_security).
 				GetRoleByName(Connection_Security.RoleName.fromConnection));
 		
 		connection_SecurityToSecurity.setRole(((Connection_Security)connection_security).
 				GetRoleByName(Connection_Security.RoleName.toSecurity));
 		connection_SecurityToSecurity.setIcomponentelement(((SecurityManager)securityManager).
-				getPortByName(SecurityManager.PortName.responseFromConnection));
+				getPortByName(SecurityManager.PortName.responseFromConnectionPort));
 		
 		//Linking security->connection
 		Attachement securityToConnection_Security = CCSFactoryImpl.eINSTANCE.createAttachement();
 		Attachement connection_SecurityToConnection = CCSFactoryImpl.eINSTANCE.createAttachement();
 		
 		securityToConnection_Security.setIcomponentelement(((SecurityManager)securityManager).
-				getPortByName(SecurityManager.PortName.securityToConnection));
+				getPortByName(SecurityManager.PortName.securityToConnectionPort));
 		securityToConnection_Security.setRole(((Connection_Security)connection_security).
 				GetRoleByName(Connection_Security.RoleName.fromSecurity));
 		
@@ -165,14 +166,14 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		database_SecurityToSecurity.setRole(((Database_Security)database_security).
 				GetRoleByName(Database_Security.RoleName.toSecurity));
 		database_SecurityToSecurity.setIcomponentelement(((SecurityManager)securityManager).
-				getPortByName(SecurityManager.PortName.responseFromDatabase));
+				getPortByName(SecurityManager.PortName.responseFromDatabasePort));
 		
 		//Linking security->database
 		Attachement securityToDatabase_Security = CCSFactoryImpl.eINSTANCE.createAttachement();
 		Attachement database_SecurityToDatabase = CCSFactoryImpl.eINSTANCE.createAttachement();
 		
 		securityToDatabase_Security.setIcomponentelement(((SecurityManager)securityManager).
-				getPortByName(SecurityManager.PortName.securityToDatabase));
+				getPortByName(SecurityManager.PortName.securityToDatabasePort));
 		securityToDatabase_Security.setRole(((Database_Security)database_security).
 				GetRoleByName(Database_Security.RoleName.fromSecurity));
 		
@@ -202,6 +203,37 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		this.ilink.add(database_SecurityToSecurity);
 		this.ilink.add(securityToDatabase_Security);
 		this.ilink.add(database_SecurityToDatabase);
+		
+		//portconfiguration for binding with connectionManager
+		PortConfiguration requestToConnectionManager = CCSFactoryImpl.eINSTANCE.createPortConfiguration();
+		PortConfiguration responseFromConnectionManager = CCSFactoryImpl.eINSTANCE.createPortConfiguration();
+		requestToConnectionManager.setMode(Mode.OFFERED);
+		responseFromConnectionManager.setMode(Mode.REQUIRED);
+		
+		this.portconfiguration.add(requestToConnectionManager);
+		this.portconfiguration.add(responseFromConnectionManager);
+		
+		//binding with connectionManager
+		Binding bindServerDetailToConnectionManager = CCSFactoryImpl.eINSTANCE.createBinding();
+		Binding bindConnectionManagerToServerDetail = CCSFactoryImpl.eINSTANCE.createBinding();
+		
+		bindServerDetailToConnectionManager.setPortconfiguration(requestToConnectionManager);
+		bindServerDetailToConnectionManager.setPort(((ConnectionManager)connectionManager).getPortByName(ConnectionManager.PortName.connectionRequestPort));
+		
+		bindConnectionManagerToServerDetail.setPort(((ConnectionManager)connectionManager).getPortByName(ConnectionManager.PortName.connectionResponsePort));
+		bindServerDetailToConnectionManager.setPortconfiguration(responseFromConnectionManager);
+		
+		this.ilink.add(bindServerDetailToConnectionManager);
+		this.ilink.add(bindConnectionManagerToServerDetail);
+		
+		//PortConfiguration for binding with outside
+		PortConfiguration detailRequest = CCSFactoryImpl.eINSTANCE.createPortConfiguration();
+		PortConfiguration detailResponse = CCSFactoryImpl.eINSTANCE.createPortConfiguration();
+		detailRequest.setMode(Mode.REQUIRED);
+		detailResponse.setMode(Mode.OFFERED);
+		
+		this.portconfiguration.add(detailRequest);
+		this.portconfiguration.add(detailResponse);
 	}
 
 }
