@@ -36,8 +36,8 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 
 
 	public ClientServer() {
-		Server server = new Server();
-		server.SetObserver(this);
+		Component server = new Server();
+		((Server)server).SetObserver(this);
 		this.component = new BasicEList<Component>();
 		this.connector = new BasicEList<Connector>();
 		this.ilink = new BasicEList<ILink>();
@@ -59,7 +59,7 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 	public Client addNewClient(Client newClient) {
 		newClient.SetName(newClient.GetName() + "_" + this.component.size());
 		//First, create the RPC that will link to server
-		RPC rpc = new RPC();
+		Connector rpc = new RPC();
 		
 		//Then, create attachements for in/out communication
 		//between RPC/Server
@@ -73,19 +73,19 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 		
 		//Link client->rpc
 		clientToRpc.setIcomponentelement(newClient.getPortByName(Client.PortName.send_request));
-		clientToRpc.setRole(rpc.GetRoleByName(RPC.RoleName.caller));
+		clientToRpc.setRole(((RPC)rpc).GetRoleByName(RPC.RoleName.caller));
 		//Link rpc->server
-		rpcToServer.setRole(rpc.GetRoleByName(RPC.RoleName.called));
+		rpcToServer.setRole(((RPC)rpc).GetRoleByName(RPC.RoleName.called));
 		rpcToServer.setIcomponentelement(GetServer().GetPortByName(Server.PortName.receive_request));
 		//Link server->rpc
 		serverToRpc.setIcomponentelement(GetServer().GetPortByName(Server.PortName.responseToClientPort));
-		serverToRpc.setRole(rpc.GetRoleByName(RPC.RoleName.calledResponse));
+		serverToRpc.setRole(((RPC)rpc).GetRoleByName(RPC.RoleName.calledResponse));
 		//Link rpc->client
-		rpcToClient.setRole(rpc.GetRoleByName(RPC.RoleName.callerResponse));
+		rpcToClient.setRole(((RPC)rpc).GetRoleByName(RPC.RoleName.callerResponse));
 		rpcToClient.setIcomponentelement(newClient.getPortByName(Client.PortName.request_response));
 		
 		newClient.SetObserver(this);
-		rpc.SetObserver(this);
+		((RPC)rpc).SetObserver(this);
 		
 		//Add created objects to the configuration's item list
 		this.component.add(newClient);

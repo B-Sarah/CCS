@@ -10,6 +10,7 @@ import ccsM2.InterfaceElement;
 import ccsM2.Role;
 
 import java.util.Collection;
+import java.util.Scanner;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -220,6 +221,8 @@ public class ConnectorImpl extends MinimalEObjectImpl.Container implements Conne
 	public void SetRoleValue(Role element, Object value) {
 		this.role.get(this.role.indexOf(element)).setContainedValue(value);
 		System.out.println("Role " + element.GetName() + " of connector " + this.GetName() + " value changed : " + value);
+		Scanner scan = new Scanner(System.in);
+		scan.nextLine();
 	}
 	
 	public Object GetRoleValue(Role element) {

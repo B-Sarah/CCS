@@ -10,6 +10,8 @@ import ccsM2.IComponentElement;
 import ccsM2.InterfaceElement;
 
 import java.util.Collection;
+import java.util.Scanner;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -233,6 +235,8 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	public void SetComponentElementValue(IComponentElement element, Object value) {
 		((InterfaceElement)this.icomponentelement.get(this.icomponentelement.indexOf(element))).setContainedValue(value);
 		System.out.println("IComponentElement " + ((InterfaceElement)element).GetName() + " of component " + this.GetName() + " value changed : " + value);
+		Scanner scan = new Scanner(System.in);
+		scan.nextLine();
 	}
 	
 	public Object GetComponentElementValue(IComponentElement element) {
