@@ -90,6 +90,10 @@ public interface Configuration extends EObject {
 	 */
 	EList<ILink> getIlink();
 	
+	public void SetPortConfigurationValue(PortConfiguration port, Object value);
 	
+	public String GetName();
+	
+	public void SetName(String name);
 
 } // Configuration

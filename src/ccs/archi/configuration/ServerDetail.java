@@ -25,11 +25,13 @@ import ccsM2.PortConfiguration;
 import ccsM2.impl.CCSFactoryImpl;
 import ccsM2.impl.ConfigurationImpl;
 
-public class ServerDetail extends ConfigurationImpl  implements ICommonElement, IObserver {
+public class ServerDetail extends ConfigurationImpl  implements ICommonElement, IObserver, IObservable {
 
 	private List<IObservable> observables = new ArrayList<IObservable>();
+	private IObserver observer;
 
 	public ServerDetail() {
+		name = "ServerDetail";
 		this.component = new BasicEList<Component>();
 		this.connector = new BasicEList<Connector>();
 		this.ilink = new BasicEList<ILink>();
@@ -68,11 +70,13 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		} else { 
 			//retrieve binding linked to notifier
 			binding = GetBindingFromElement(notifier);
+			
 			if(binding != null){
 				//case we have a portConfiguration and need to redirect to the element port
 				if(binding.getPortconfiguration() == notifier) {
 					GetComponentContainingElement(binding.getPort()).SetComponentElementValue(binding.getPort(), notifier.getContainedValue());
 				} else { //case the configuration itself is receiver of the notification
+					
 					this.portconfiguration.get(this.portconfiguration.indexOf(binding.getPortconfiguration())).setContainedValue(notifier.getContainedValue());
 					Work(binding.getPortconfiguration());
 				}
@@ -83,10 +87,6 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 
 	}
 	
-	@Override
-	protected void Work(PortConfiguration inputChanged) {
-		super.Work(inputChanged);
-	}
 
 	@Override
 	public void initElements() {
@@ -191,6 +191,13 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		this.connector.add(connection_security);
 		this.connector.add(database_security);
 		
+		((IObservable)connectionManager).SetObserver(this);
+		((IObservable)securityManager).SetObserver(this);
+		((IObservable)database).SetObserver(this);
+		((IObservable)connection_database).SetObserver(this);
+		((IObservable)connection_security).SetObserver(this);
+		((IObservable)database_security).SetObserver(this);
+		
 		this.ilink.add(connectionToConnection_database);
 		this.ilink.add(connection_databaseToDatabase);
 		this.ilink.add(databaseToConnection_database);
@@ -210,8 +217,12 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		requestToConnectionManager.setMode(Mode.OFFERED);
 		responseFromConnectionManager.setMode(Mode.REQUIRED);
 		
+		((InterfaceElement)requestToConnectionManager).SetName("requestToConnectionManager");
+		((InterfaceElement)responseFromConnectionManager).SetName("responseFromConnectionManager");
+		
 		this.portconfiguration.add(requestToConnectionManager);
 		this.portconfiguration.add(responseFromConnectionManager);
+		
 		
 		//binding with connectionManager
 		Binding bindServerDetailToConnectionManager = CCSFactoryImpl.eINSTANCE.createBinding();
@@ -221,7 +232,7 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		bindServerDetailToConnectionManager.setPort(((ConnectionManager)connectionManager).getPortByName(ConnectionManager.PortName.connectionRequestPort));
 		
 		bindConnectionManagerToServerDetail.setPort(((ConnectionManager)connectionManager).getPortByName(ConnectionManager.PortName.connectionResponsePort));
-		bindServerDetailToConnectionManager.setPortconfiguration(responseFromConnectionManager);
+		bindConnectionManagerToServerDetail.setPortconfiguration(responseFromConnectionManager);
 		
 		this.ilink.add(bindServerDetailToConnectionManager);
 		this.ilink.add(bindConnectionManagerToServerDetail);
@@ -230,10 +241,61 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		PortConfiguration detailRequest = CCSFactoryImpl.eINSTANCE.createPortConfiguration();
 		PortConfiguration detailResponse = CCSFactoryImpl.eINSTANCE.createPortConfiguration();
 		detailRequest.setMode(Mode.REQUIRED);
+		detailRequest.SetName("detailRequest");
 		detailResponse.setMode(Mode.OFFERED);
+		detailResponse.SetName("detailResponse");
 		
 		this.portconfiguration.add(detailRequest);
 		this.portconfiguration.add(detailResponse);
 	}
+	
+	public void SetInputRequest(Object request) {
+		//cheating, portConfig(0) is request port
+		this.portconfiguration.get(0).setContainedValue(request);
+		ReceivedNotification(this.portconfiguration.get(0));
+	}
+	
+	public Object GetRequestResultPort() {
+		return this.portconfiguration.get(1);
+	}
+	
+	public PortConfiguration GetDetailRequestPort() {
+		return this.portconfiguration.get(2);
+	}
+	public PortConfiguration GetDetailResponsePort() {
+		return this.portconfiguration.get(3);
+	}
+	
+	@Override
+	public void SetPortConfigurationValue(PortConfiguration port, Object value) {
+		super.SetPortConfigurationValue(port, value);
+		if (port.getMode() == Mode.OFFERED)
+			NotifyObserver((InterfaceElement) port);
+		else
+			Work(port);
+	}
+	
+	@Override
+	protected void Work(PortConfiguration inputChanged) {
+		super.Work(inputChanged);
+		if(inputChanged == GetDetailRequestPort()) {
+			SetInputRequest(inputChanged.getContainedValue());
+		}
+		else if(inputChanged == GetRequestResultPort()) {
+			SetPortConfigurationValue(GetDetailResponsePort(), inputChanged.getContainedValue());
+		}
+	}
+	
+	@Override
+	public void NotifyObserver(InterfaceElement elementChanged) {
+		this.observer.ReceivedNotification(elementChanged);
+	}
+
+	@Override
+	public void SetObserver(IObserver anObserver) {
+		this.observer = anObserver;
+		this.observer.AddObservable(this);
+	}
+
 
 }

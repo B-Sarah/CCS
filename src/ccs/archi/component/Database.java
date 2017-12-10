@@ -1,5 +1,6 @@
 package ccs.archi.component;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -22,7 +23,29 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 	public Database() {
 		this.name = "Database";
 		this.icomponentelement = new BasicEList<IComponentElement>();
+		this.usersInformations = new HashMap<String, User>();
 		initElements();
+		
+		InitDatabaseValues();
+	}
+
+	private void InitDatabaseValues() {
+		initUsers();
+	}
+
+	private void initUsers() {
+		User user1 = new User();
+		user1.setFname("Lex");
+		user1.setLname("Donn");
+		user1.setPassword("blabla");
+		user1.setMeetings("Meeting 1 : 11/12/2017 : 13h : LS2N salle 14\nMeeting 2 : 20/12/2017 : 10h : LS2N salle 114 / ");
+		this.usersInformations.put("lx.donn@gmail.com", user1);
+		User user2 = new User();
+		user2.setFname("Sarah");
+		user2.setLname("cely");
+		user2.setPassword("alma");
+		user2.setMeetings("Meeting 1 : 11/12/2017 : 14h : Batiment info salle 46 ");
+		this.usersInformations.put("sboutahlil@gmail.com", user2);
 	}
 
 	public Map<String, User> getUsersInformations() {
@@ -98,17 +121,16 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 
 			SetComponentElementValue(getPortByName(PortName.databaseToSecurityPort), response);
 		}
-		if (changedInput == getPortByName(PortName.responseFromConnectionPort)) {
+		else if (changedInput == getPortByName(PortName.responseFromConnectionPort)) {
+			String resp = "";
 			if (getUserInformations(id) != null)
-				response = getUserInformations(id).toString();
-			else {
-				response = "";
-			}
+				resp= getUserInformations(id).toString();
 
+			SetComponentElementValue(getPortByName(PortName.databaseToConnectionPort), resp);
 		}
-		SetComponentElementValue(getPortByName(PortName.databaseToConnectionPort), response);
+		
 	}
-
+	
 	/* return port by given name */
 	public Port getPortByName(PortName name) {
 		switch (name) {

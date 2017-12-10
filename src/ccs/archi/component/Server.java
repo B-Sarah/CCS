@@ -14,12 +14,13 @@ import ccsM2.impl.ComponentImpl;
 public class Server extends ComponentImpl implements ICommonElement, IObservable {
 
 	private IObserver observer;
+	int maxClient = 0;
 	
 	//A simple hack to allow multiple client
 	private IComponentElement portToRespond;
 
 	public enum PortName {
-		receive_request, responseToClientPort, serverRequestRedirectPort, responseFromDetailPort
+		serverRequestRedirectPort, responseFromDetailPort
 	}
 
 	public Server() {
@@ -41,14 +42,10 @@ public class Server extends ComponentImpl implements ICommonElement, IObservable
 
 	public Port GetPortByName(PortName name) {
 		switch (name) {
-		case receive_request:
-			return (Port) this.icomponentelement.get(0);
-		case responseToClientPort:
-			return (Port) this.icomponentelement.get(1);
 		case serverRequestRedirectPort:
-			return (Port) this.icomponentelement.get(2);
+			return (Port) this.icomponentelement.get(0);
 		case responseFromDetailPort:
-			return (Port) this.icomponentelement.get(3);
+			return (Port) this.icomponentelement.get(1);
 		}
 		return null;
 	}
@@ -62,12 +59,13 @@ public class Server extends ComponentImpl implements ICommonElement, IObservable
 	public void SetObserver(IObserver anObserver) {
 		this.observer = anObserver;
 		this.observer.AddObservable(this);
+		((IObservable)this.configuration).SetObserver(observer);
 	}
 
 	@Override
 	public void initElements() {
 		/* Ports setup for client communication */
-		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
+		/*Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
 		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();
 
 		receive_request.setMode(Mode.REQUIRED);
@@ -75,10 +73,8 @@ public class Server extends ComponentImpl implements ICommonElement, IObservable
 		responseToClientPort.setMode(Mode.OFFERED);
 		responseToClientPort.SetName("responseToClientPort");
 
-		System.out.println(receive_request);
-
 		this.icomponentelement.add(receive_request);
-		this.icomponentelement.add(responseToClientPort);
+		this.icomponentelement.add(responseToClientPort);*/
 
 		/* Ports setup for detail communication */
 		Port serverRequestRedirectPort = CCSFactoryImpl.eINSTANCE.createPort();
@@ -97,8 +93,32 @@ public class Server extends ComponentImpl implements ICommonElement, IObservable
 	protected void Work(IComponentElement changedInput) {
 		super.Work(changedInput);
 
-		SetComponentElementValue(GetPortByName(PortName.responseToClientPort),
-				(Integer) ((InterfaceElement) changedInput).getContainedValue() * 2);
+		if(((InterfaceElement)changedInput).GetName().contains("receive_request")) {
+			portToRespond = this.icomponentelement.get(this.icomponentelement.indexOf(changedInput) + 1);
+			SetComponentElementValue(GetPortByName(PortName.serverRequestRedirectPort),
+					((InterfaceElement) changedInput).getContainedValue());
+		}
+		if(changedInput == GetPortByName(PortName.responseFromDetailPort)) {
+			SetComponentElementValue(portToRespond,
+					((InterfaceElement) changedInput).getContainedValue());
+			portToRespond = null;
+		}
+		
+	}
+	
+	public void ConnectNewClient(int clientId) {
+		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
+		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();
+		
+		receive_request.setMode(Mode.REQUIRED);
+		receive_request.SetName("receive_request_"+clientId);
+		responseToClientPort.setMode(Mode.OFFERED);
+		responseToClientPort.SetName("responseToClientPort_"+clientId);
+		
+		this.icomponentelement.add(receive_request);
+		this.icomponentelement.add(responseToClientPort);
+		
+		maxClient++;
 	}
 
 }

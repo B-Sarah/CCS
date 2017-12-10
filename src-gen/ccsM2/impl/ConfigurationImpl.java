@@ -16,6 +16,7 @@ import ccsM2.PortConfiguration;
 import ccsM2.Role;
 
 import java.util.Collection;
+import java.util.Scanner;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -316,10 +317,28 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 		}
 		return null;
 	}
-	
-	protected void Work(PortConfiguration inputChanged) {
-		
+
+
+	public void SetPortConfigurationValue(PortConfiguration port, Object value) {
+		port.setContainedValue(value);
+		System.out.println("PortConfiguration " + port.GetName() + " of component " + this.GetName() + " value changed : " + value);
+		Scanner scan = new Scanner(System.in);
+		scan.nextLine();
 	}
 	
+	
+	protected void Work(PortConfiguration inputChanged) {
+		System.out.println("Configuration " + this.GetName() + " working...");
+	}
+	
+	protected String name = "";
+	
+	public String GetName() {
+		return this.name;
+	}
+	
+	public void SetName(String name) {
+		this.name = name;
+	}
 
 } // ConfigurationImpl

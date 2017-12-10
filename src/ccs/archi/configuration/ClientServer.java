@@ -47,6 +47,16 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 		mapClientToRequestPort = new HashMap<Client, PortConfiguration>();
 		mapClientToResponsePort = new HashMap<Client, PortConfiguration>();
 		
+		Binding serverToDetail = CCSFactoryImpl.eINSTANCE.createBinding();
+		serverToDetail.setPort(((Server)server).GetPortByName(Server.PortName.serverRequestRedirectPort));
+		serverToDetail.setPortconfiguration(((ServerDetail)server.getConfiguration()).GetDetailRequestPort());
+		
+		Binding detailToServer = CCSFactoryImpl.eINSTANCE.createBinding();
+		detailToServer.setPortconfiguration(((ServerDetail)server.getConfiguration()).GetDetailResponsePort());
+		detailToServer.setPort(((Server)server).GetPortByName(Server.PortName.responseFromDetailPort));
+		
+		this.ilink.add(serverToDetail);
+		this.ilink.add(detailToServer);
 		initElements();
 		
 	}
@@ -57,9 +67,12 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 	}
 	
 	public Client addNewClient(Client newClient) {
-		newClient.SetName(newClient.GetName() + "_" + this.component.size());
+		int clientId =  this.component.size();
+		newClient.SetName(newClient.GetName() + "_" + clientId);
 		//First, create the RPC that will link to server
 		Connector rpc = new RPC();
+		
+		((Server)GetServer()).ConnectNewClient(clientId);
 		
 		//Then, create attachements for in/out communication
 		//between RPC/Server
@@ -76,9 +89,9 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 		clientToRpc.setRole(((RPC)rpc).GetRoleByName(RPC.RoleName.caller));
 		//Link rpc->server
 		rpcToServer.setRole(((RPC)rpc).GetRoleByName(RPC.RoleName.called));
-		rpcToServer.setIcomponentelement(GetServer().GetPortByName(Server.PortName.receive_request));
+		rpcToServer.setIcomponentelement(GetServer().getIcomponentelement().get(GetServer().getIcomponentelement().size() - 2));
 		//Link server->rpc
-		serverToRpc.setIcomponentelement(GetServer().GetPortByName(Server.PortName.responseToClientPort));
+		serverToRpc.setIcomponentelement(GetServer().getIcomponentelement().get(GetServer().getIcomponentelement().size() - 1));
 		serverToRpc.setRole(((RPC)rpc).GetRoleByName(RPC.RoleName.calledResponse));
 		//Link rpc->client
 		rpcToClient.setRole(((RPC)rpc).GetRoleByName(RPC.RoleName.callerResponse));
@@ -152,8 +165,12 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 				if(binding.getPortconfiguration() == notifier) {
 					GetComponentContainingElement(binding.getPort()).SetComponentElementValue(binding.getPort(), notifier.getContainedValue());
 				} else { //case the configuration itself is receiver of the notification
-					this.portconfiguration.get(this.portconfiguration.indexOf(binding.getPortconfiguration())).setContainedValue(notifier.getContainedValue());
-					Work(binding.getPortconfiguration());
+					if(this.portconfiguration.contains(binding.getPortconfiguration())) { // if portconfig found is self
+						this.portconfiguration.get(this.portconfiguration.indexOf(binding.getPortconfiguration())).setContainedValue(notifier.getContainedValue());
+						Work(binding.getPortconfiguration());
+					} else { //else, another config 
+						GetServer().getConfiguration().SetPortConfigurationValue(binding.getPortconfiguration(), notifier.getContainedValue());
+					}
 				}
 			}
 		}
@@ -165,6 +182,7 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 	@Override
 	protected void Work(PortConfiguration inputChanged) {
 		super.Work(inputChanged);
+		//send to outside value ...
 	}
 
 	@Override
@@ -186,5 +204,8 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 		GetRequestPortOf(aClient).setContainedValue(request);
 		ReceivedNotification(GetRequestPortOf(aClient));
 	}
-
+	
+	public Object ReceiveRequestOfClient(Client aClient) {
+		return GetResponsePortOf(aClient).getContainedValue();
+	}
 }

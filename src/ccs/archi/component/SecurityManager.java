@@ -5,12 +5,12 @@ import org.eclipse.emf.common.util.BasicEList;
 import ccs.archi.interfaces.ICommonElement;
 import ccs.archi.interfaces.IObservable;
 import ccs.archi.interfaces.IObserver;
-import ccsM2.CCSFactory;
 import ccsM2.IComponentElement;
 import ccsM2.InterfaceElement;
 import ccsM2.Mode;
 import ccsM2.Port;
 import ccsM2.impl.ComponentImpl;
+import ccsM2.impl.CCSFactoryImpl;
 
 public class SecurityManager extends ComponentImpl implements ICommonElement, IObservable {
 
@@ -30,15 +30,15 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 	}
 
 	public void initElements() {
-		Port securityToDatabasePort = CCSFactory.eINSTANCE.createPort();
-		Port securityToConnectionPort = CCSFactory.eINSTANCE.createPort();
-		Port responseFromConnectionPort = CCSFactory.eINSTANCE.createPort();
-		Port responseFromDatabasePort = CCSFactory.eINSTANCE.createPort();
+		Port securityToDatabasePort = CCSFactoryImpl.eINSTANCE.createPort();
+		Port securityToConnectionPort = CCSFactoryImpl.eINSTANCE.createPort();
+		Port responseFromConnectionPort = CCSFactoryImpl.eINSTANCE.createPort();
+		Port responseFromDatabasePort = CCSFactoryImpl.eINSTANCE.createPort();
 
 		securityToDatabasePort.setMode(Mode.OFFERED);
 		securityToConnectionPort.setMode(Mode.OFFERED);
 		responseFromConnectionPort.setMode(Mode.REQUIRED);
-		responseFromDatabasePort.SetMode(Mode.REQUIRED);
+		responseFromDatabasePort.setMode(Mode.REQUIRED);
 		
 		securityToDatabasePort.SetName("securityToDatabasePort");
 		securityToConnectionPort.SetName("securityToConnectionPort");
@@ -79,12 +79,19 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 		Object response = ((InterfaceElement) changedInput).getContainedValue();
 
 		if (changedInput == getPortByName(PortName.responseFromConnectionPort)) {
-			lastUserLogInfos = ((String) response).split(":")[1] + ":" + ((String) response).split(":")[1];
+			lastUserLogInfos = ((String) response).split(":")[1] + ":" + ((String) response).split(":")[2];
 			SetComponentElementValue(getPortByName(PortName.securityToDatabasePort), response);
 		}
 		if (changedInput == getPortByName(PortName.responseFromDatabasePort)) {
 			String idEntered = lastUserLogInfos.split(":")[0];
 			String passwordEntered = lastUserLogInfos.split(":")[1];
+			
+			if(response == "") {
+				lastUserLogInfos = null;
+				response = idEntered + ":" + "false";
+				SetComponentElementValue(getPortByName(PortName.securityToConnectionPort), response);
+				return;
+			}
 
 			String correctPassword = ((String) response).split(":")[1];
 			if (lastUserLogInfos != null && passwordEntered.equals(correctPassword)) {
@@ -93,8 +100,9 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 				lastUserLogInfos = null;
 				response = idEntered + ":" + "false";
 			}
+			SetComponentElementValue(getPortByName(PortName.securityToConnectionPort), response);
 		}
-		SetComponentElementValue(getPortByName(PortName.securityToConnectionPort), response);
+		
 	}
 
 	
