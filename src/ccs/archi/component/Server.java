@@ -26,7 +26,7 @@ public class Server extends ComponentImpl implements ICommonElement, IObservable
 		name = "Server";
 		this.icomponentelement = new BasicEList<IComponentElement>();
 		this.configuration = new ServerDetail();
-		initPort();
+		initElements();
 
 	}
 
@@ -65,7 +65,7 @@ public class Server extends ComponentImpl implements ICommonElement, IObservable
 	}
 
 	@Override
-	public void initPort() {
+	public void initElements() {
 		/* Ports setup for client communication */
 		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
 		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();

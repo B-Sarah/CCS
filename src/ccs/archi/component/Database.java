@@ -21,7 +21,7 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 
 	public Database() {
 		this.icomponentelement = new BasicEList<IComponentElement>();
-		initPort();
+		initElements();
 	}
 
 	public Map<String, User> getUsersInformations() {
@@ -38,7 +38,7 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 		databaseToSecurityPort, databaseToConnectionPort, responseFromSecurityPort, responseFromConnectionPort
 	}
 
-	public void initPort() {
+	public void initElements() {
 		Port databaseToSecurityPort = CCSFactoryImpl.eINSTANCE.createPort();
 		Port databaseToConnectionPort = CCSFactoryImpl.eINSTANCE.createPort();
 		Port responseFromSecurityPort = CCSFactoryImpl.eINSTANCE.createPort();

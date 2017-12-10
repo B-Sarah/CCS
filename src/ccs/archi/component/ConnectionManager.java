@@ -32,11 +32,11 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement, 
 	public ConnectionManager() {
 		this.icomponentelement = new BasicEList<IComponentElement>();
 		connectedUsers = new HashMap<String, Boolean>();
-		initPort();
+		initElements();
 
 	}
 
-	public void initPort() {
+	public void initElements() {
 		Port connectionRequestPort = CCSFactory.eINSTANCE.createPort();
 		Port connectionResponsePort = CCSFactory.eINSTANCE.createPort();
 		Port connectionToSecurity = CCSFactory.eINSTANCE.createPort();

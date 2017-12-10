@@ -24,11 +24,11 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 
 	public SecurityManager() {
 		this.icomponentelement = new BasicEList<IComponentElement>();
-		initPort();
+		initElements();
 
 	}
 
-	public void initPort() {
+	public void initElements() {
 		Port securityToDatabase = CCSFactory.eINSTANCE.createPort();
 		Port securityToConnection = CCSFactory.eINSTANCE.createPort();
 		Port responseFromConnection = CCSFactory.eINSTANCE.createPort();

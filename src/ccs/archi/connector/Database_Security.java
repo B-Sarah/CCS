@@ -23,7 +23,7 @@ public class Database_Security extends ConnectorImpl implements ICommonElement, 
 	public Database_Security() {
 		name = "Database_Security";
 		this.role = new BasicEList<Role>();
-		initPort();
+		initElements();
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class Database_Security extends ConnectorImpl implements ICommonElement, 
 	}
 
 	@Override
-	public void initPort() {
+	public void initElements() {
 		// From client to server communication
 		Role fromDatabase = CCSFactoryImpl.eINSTANCE.createRole();
 		Role toSecurity = CCSFactoryImpl.eINSTANCE.createRole();

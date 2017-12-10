@@ -47,7 +47,7 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 		mapClientToRequestPort = new HashMap<Client, PortConfiguration>();
 		mapClientToResponsePort = new HashMap<Client, PortConfiguration>();
 		
-		initPort();
+		initElements();
 		
 	}
 	
@@ -168,7 +168,7 @@ public class ClientServer extends ConfigurationImpl implements ICommonElement, I
 	}
 
 	@Override
-	public void initPort() {
+	public void initElements() {
 
 	}
 	

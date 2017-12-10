@@ -34,7 +34,7 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		this.ilink = new BasicEList<ILink>();
 		this.portconfiguration = new BasicEList<PortConfiguration>();
 
-		initPort();
+		initElements();
 		
 		
 	}
@@ -88,7 +88,7 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 	}
 
 	@Override
-	public void initPort() {
+	public void initElements() {
 		Component connectionManager = new ConnectionManager();
 		Component securityManager = new SecurityManager();
 		Component database = new Database();
@@ -203,4 +203,5 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		this.ilink.add(securityToDatabase_Security);
 		this.ilink.add(database_SecurityToDatabase);
 	}
+
 }

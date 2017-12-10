@@ -22,7 +22,7 @@ public class Connection_Database extends ConnectorImpl implements ICommonElement
 	public Connection_Database() {
 		name = "Connection_Database";
 		this.role = new BasicEList<Role>();
-		initPort();
+		initElements();
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class Connection_Database extends ConnectorImpl implements ICommonElement
 	}
 
 	@Override
-	public void initPort() {
+	public void initElements() {
 		// From client to server communication
 		Role fromConnection = CCSFactoryImpl.eINSTANCE.createRole();
 		Role toDatabase = CCSFactoryImpl.eINSTANCE.createRole();

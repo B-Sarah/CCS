@@ -25,7 +25,7 @@ public class RPC extends ConnectorImpl implements ICommonElement, IObservable {
 	public RPC() {
 		name = "RPC";
 		this.role = new BasicEList<Role>();
-		initPort();
+		initElements();
 	}
 	
 	
@@ -75,7 +75,7 @@ public class RPC extends ConnectorImpl implements ICommonElement, IObservable {
 
 
 	@Override
-	public void initPort() {
+	public void initElements() {
 		//From client to server communication
 				Role caller = CCSFactoryImpl.eINSTANCE.createRole();
 				Role called = CCSFactoryImpl.eINSTANCE.createRole();
