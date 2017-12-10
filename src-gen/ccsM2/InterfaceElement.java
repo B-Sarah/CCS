@@ -122,5 +122,9 @@ public interface InterfaceElement extends EObject {
 	 * @generated
 	 */
 	void SetVisibility(Visibility visibility);
+	
+	public String GetName();
+	
+	public void SetName(String name);
 
 } // InterfaceElement

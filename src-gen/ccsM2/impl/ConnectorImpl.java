@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class ConnectorImpl extends MinimalEObjectImpl.Container implements Connector {
+	protected String name = "";
 	/**
 	 * The cached value of the '{@link #getGlue() <em>Glue</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -218,6 +219,7 @@ public class ConnectorImpl extends MinimalEObjectImpl.Container implements Conne
 	
 	public void SetRoleValue(Role element, Object value) {
 		this.role.get(this.role.indexOf(element)).setContainedValue(value);
+		System.out.println("Role " + element.GetName() + " of connector " + this.GetName() + " value changed : " + value);
 	}
 	
 	public Object GetRoleValue(Role element) {
@@ -225,7 +227,15 @@ public class ConnectorImpl extends MinimalEObjectImpl.Container implements Conne
 	}
 	
 	protected void Work(Role changedInput) {
-		
+		System.out.println("Connector " + this.GetName() + " working...");
+	}
+	
+	public String GetName() {
+		return this.name;
+	}
+	
+	public void SetName(String name) {
+		this.name = name;
 	}
 
 } //ConnectorImpl

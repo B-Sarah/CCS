@@ -3,6 +3,7 @@
 package ccsM2.impl;
 
 import ccsM2.Attachement;
+import ccsM2.Binding;
 import ccsM2.CCSPackage;
 import ccsM2.Component;
 import ccsM2.Configuration;
@@ -29,26 +30,26 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Configuration</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object
+ * '<em><b>Configuration</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link ccsM2.impl.ConfigurationImpl#getConnector <em>Connector</em>}</li>
- *   <li>{@link ccsM2.impl.ConfigurationImpl#getComponent <em>Component</em>}</li>
- *   <li>{@link ccsM2.impl.ConfigurationImpl#getPortconfiguration <em>Portconfiguration</em>}</li>
- *   <li>{@link ccsM2.impl.ConfigurationImpl#getIlink <em>Ilink</em>}</li>
+ * <li>{@link ccsM2.impl.ConfigurationImpl#getConnector <em>Connector</em>}</li>
+ * <li>{@link ccsM2.impl.ConfigurationImpl#getComponent <em>Component</em>}</li>
+ * <li>{@link ccsM2.impl.ConfigurationImpl#getPortconfiguration
+ * <em>Portconfiguration</em>}</li>
+ * <li>{@link ccsM2.impl.ConfigurationImpl#getIlink <em>Ilink</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ConfigurationImpl extends MinimalEObjectImpl.Container implements Configuration {
 	/**
-	 * The cached value of the '{@link #getConnector() <em>Connector</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getConnector() <em>Connector</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getConnector()
 	 * @generated
 	 * @ordered
@@ -56,9 +57,9 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	protected EList<Connector> connector;
 
 	/**
-	 * The cached value of the '{@link #getComponent() <em>Component</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getComponent() <em>Component</em>}'
+	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getComponent()
 	 * @generated
 	 * @ordered
@@ -66,9 +67,10 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	protected EList<Component> component;
 
 	/**
-	 * The cached value of the '{@link #getPortconfiguration() <em>Portconfiguration</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getPortconfiguration()
+	 * <em>Portconfiguration</em>}' containment reference list. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @see #getPortconfiguration()
 	 * @generated
 	 * @ordered
@@ -76,9 +78,9 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	protected EList<PortConfiguration> portconfiguration;
 
 	/**
-	 * The cached value of the '{@link #getIlink() <em>Ilink</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getIlink() <em>Ilink</em>}' containment
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getIlink()
 	 * @generated
 	 * @ordered
@@ -86,8 +88,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	protected EList<ILink> ilink;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected ConfigurationImpl() {
@@ -95,8 +97,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -105,8 +107,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Connector> getConnector() {
@@ -118,8 +120,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<Component> getComponent() {
@@ -131,8 +133,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<PortConfiguration> getPortconfiguration() {
@@ -144,8 +146,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<ILink> getIlink() {
@@ -156,8 +158,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -176,8 +178,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -196,8 +198,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -225,8 +227,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -249,8 +251,8 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -267,35 +269,57 @@ public class ConfigurationImpl extends MinimalEObjectImpl.Container implements C
 		}
 		return super.eIsSet(featureID);
 	}
-	
+
 	protected Attachement GetAttachementFromElement(InterfaceElement element) {
-		
-		//Iterate over all attachements of configuration
-		//to find one that has port as a connection
-		for(ILink aLink  : this.ilink) {
-			if(aLink instanceof Attachement) {
-				if(((Attachement)aLink).getIcomponentelement() == element || 
-						((Attachement)aLink).getRole() == element) {
-					return (Attachement)aLink;
+
+		// Iterate over all attachements of configuration
+		// to find one that has port as a connection
+		for (ILink aLink : this.ilink) {
+			if (aLink instanceof Attachement) {
+				if (((Attachement) aLink).getIcomponentelement() == element
+						|| ((Attachement) aLink).getRole() == element) {
+					return (Attachement) aLink;
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
-	protected Component GetComponentContainingElement(IComponentElement element) {
-		for(Component c : this.component) {
-			if(c.getIcomponentelement().contains(element)) return c;
+
+	protected Binding GetBindingFromElement(InterfaceElement element) {
+		// Iterate over all attachements of configuration
+		// to find one that has port as a connection
+		for (ILink aLink : this.ilink) {
+			if (aLink instanceof Binding) {
+				if (((Binding) aLink).getPort() == element 
+						|| ((Binding) aLink).getPortconfiguration() == element) {
+					return (Binding) aLink;
+				}
+			}
 		}
+
 		return null;
 	}
-	
-	protected Connector GetConnectorContainingRole(Role element) {
-		for(Connector c : this.connector) {
-			if(c.getRole().contains(element)) return c;
+
+	protected Component GetComponentContainingElement(IComponentElement element) {
+		for (Component c : this.component) {
+			if (c.getIcomponentelement().contains(element))
+				return c;
 		}
 		return null;
 	}
 
-} //ConfigurationImpl
+	protected Connector GetConnectorContainingRole(Role element) {
+		for (Connector c : this.connector) {
+			if (c.getRole().contains(element))
+				return c;
+		}
+		return null;
+	}
+	
+	protected void Work(PortConfiguration inputChanged) {
+		
+	}
+	
+
+} // ConfigurationImpl

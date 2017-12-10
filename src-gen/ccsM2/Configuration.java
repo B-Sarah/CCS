@@ -89,5 +89,7 @@ public interface Configuration extends EObject {
 	 * @generated
 	 */
 	EList<ILink> getIlink();
+	
+	
 
 } // Configuration

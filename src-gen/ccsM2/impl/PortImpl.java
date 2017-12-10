@@ -35,6 +35,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * @generated
  */
 public class PortImpl extends MinimalEObjectImpl.Container implements Port {
+	
+	protected String name = "";
 	/**
 	 * The default value of the '{@link #getMode() <em>Mode</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -371,5 +373,14 @@ public class PortImpl extends MinimalEObjectImpl.Container implements Port {
 		result.append(')');
 		return result.toString();
 	}
+	
+	public String GetName() {
+		return this.name;
+	}
+	
+	public void SetName(String name) {
+		this.name = name;
+	}
+
 
 } //PortImpl

@@ -25,6 +25,7 @@ public class Client extends ComponentImpl implements ICommonElement, IObservable
 	
 
 	public Client() {
+		this.name = "Client";
 		this.icomponentelement = new BasicEList<IComponentElement>();
 		initPort();
 		
@@ -49,6 +50,19 @@ public class Client extends ComponentImpl implements ICommonElement, IObservable
 		else
 			Work(element);
 	}
+	
+	@Override
+	protected void Work(IComponentElement changedInput) {
+		super.Work(changedInput);
+		if(changedInput == getPortByName(Client.PortName.ClientRequestPort)) {
+			SetComponentElementValue(getPortByName(Client.PortName.send_request), ((InterfaceElement)changedInput).getContainedValue());
+		}
+		if(changedInput == getPortByName(Client.PortName.request_response)) {
+			SetComponentElementValue(getPortByName(Client.PortName.ClientResponsePort), ((InterfaceElement)changedInput).getContainedValue());
+		}
+		
+		
+	}
 
 	@Override
 	public void NotifyObserver(InterfaceElement elementChanged) {
@@ -68,7 +82,9 @@ public class Client extends ComponentImpl implements ICommonElement, IObservable
 				Port request_response = CCSFactoryImpl.eINSTANCE.createPort();
 				
 				send_request.setMode(Mode.OFFERED);
+				send_request.SetName("send_request");
 				request_response.setMode(Mode.REQUIRED);
+				request_response.SetName("request_response");
 				
 				this.icomponentelement.add(send_request);
 				this.icomponentelement.add(request_response);
@@ -81,10 +97,12 @@ public class Client extends ComponentImpl implements ICommonElement, IObservable
 				Port ClientResponsePort = CCSFactoryImpl.eINSTANCE.createPort();
 				
 				ClientRequestPort.setMode(Mode.REQUIRED);
+				ClientRequestPort.SetName("ClientRequestPort");
 				ClientResponsePort.setMode(Mode.OFFERED);
+				ClientResponsePort.SetName("ClientResponsePort");
 				
-				this.icomponentelement.add(ClientResponsePort);
 				this.icomponentelement.add(ClientRequestPort);
+				this.icomponentelement.add(ClientResponsePort);
 		
 	}
 }

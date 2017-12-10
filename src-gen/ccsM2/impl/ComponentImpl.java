@@ -39,6 +39,8 @@ import ccs.archi.component.Client.PortName;
  * @generated
  */
 public class ComponentImpl extends MinimalEObjectImpl.Container implements Component {
+	protected String name = "";
+	
 	/**
 	 * The cached value of the '{@link #getConfiguration() <em>Configuration</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -230,6 +232,7 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	
 	public void SetComponentElementValue(IComponentElement element, Object value) {
 		((InterfaceElement)this.icomponentelement.get(this.icomponentelement.indexOf(element))).setContainedValue(value);
+		System.out.println("IComponentElement " + ((InterfaceElement)element).GetName() + " of component " + this.GetName() + " value changed : " + value);
 	}
 	
 	public Object GetComponentElementValue(IComponentElement element) {
@@ -237,7 +240,15 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	}
 	
 	protected void Work(IComponentElement changedInput) {
-		
+		System.out.println("Component " + this.GetName() + " working...");
+	}
+	
+	public String GetName() {
+		return this.name;
+	}
+	
+	public void SetName(String name) {
+		this.name = name;
 	}
 
 } //ComponentImpl

@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * @generated
  */
 public class InterfaceElementImpl extends MinimalEObjectImpl.Container implements InterfaceElement {
+	
+	protected String name = "";
 	/**
 	 * The default value of the '{@link #getMode() <em>Mode</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -305,6 +307,14 @@ public class InterfaceElementImpl extends MinimalEObjectImpl.Container implement
 		result.append(containedValue);
 		result.append(')');
 		return result.toString();
+	}
+	
+	public String GetName() {
+		return this.name;
+	}
+	
+	public void SetName(String name) {
+		this.name = name;
 	}
 
 } //InterfaceElementImpl
