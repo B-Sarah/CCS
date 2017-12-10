@@ -1,10 +1,5 @@
 package ccs.archi.component;
-
-import java.util.ArrayList;
-
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-
 import ccs.archi.configuration.ServerDetail;
 import ccs.archi.interfaces.ICommonElement;
 import ccs.archi.interfaces.IObservable;
@@ -89,12 +84,13 @@ public class Server extends ComponentImpl implements ICommonElement, IObservable
 		this.icomponentelement.add(serverRequestRedirectPort);
 		this.icomponentelement.add(responseFromDetailPort);
 	}
-	
+
 	@Override
 	protected void Work(IComponentElement changedInput) {
 		super.Work(changedInput);
-		
-		SetComponentElementValue(GetPortByName(PortName.responseToClientPort), (Integer)((InterfaceElement)changedInput).getContainedValue() * 2);
+
+		SetComponentElementValue(GetPortByName(PortName.responseToClientPort),
+				(Integer) ((InterfaceElement) changedInput).getContainedValue() * 2);
 	}
 
 }
