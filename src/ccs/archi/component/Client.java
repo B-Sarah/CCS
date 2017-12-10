@@ -1,5 +1,8 @@
 package ccs.archi.component;
 
+import org.eclipse.emf.common.util.BasicEList;
+
+import ccs.archi.interfaces.ICommonElement;
 import ccs.archi.interfaces.IObservable;
 import ccs.archi.interfaces.IObserver;
 import ccsM2.IComponentElement;
@@ -9,7 +12,7 @@ import ccsM2.Port;
 import ccsM2.impl.CCSFactoryImpl;
 import ccsM2.impl.ComponentImpl;
 
-public class Client extends ComponentImpl implements IObservable{
+public class Client extends ComponentImpl implements ICommonElement, IObservable{
 	
 	private IObserver observer;
 
@@ -22,28 +25,9 @@ public class Client extends ComponentImpl implements IObservable{
 	
 
 	public Client() {
-		//init communication port (client->server) 
-		Port send_request = CCSFactoryImpl.eINSTANCE.createPort();
-		Port request_response = CCSFactoryImpl.eINSTANCE.createPort();
+		this.icomponentelement = new BasicEList<IComponentElement>();
+		initPort();
 		
-		send_request.setMode(Mode.OFFERED);
-		request_response.setMode(Mode.REQUIRED);
-		
-		this.icomponentelement.add(send_request);
-		this.icomponentelement.add(request_response);
-		
-		
-		/* Ports setup for outside communication */
-		//init request redirect port( clientServer->client)
-		Port ClientRequestPort =  CCSFactoryImpl.eINSTANCE.createPort();
-		//init communication port (client->clientServer) 
-		Port ClientResponsePort = CCSFactoryImpl.eINSTANCE.createPort();
-		
-		ClientRequestPort.setMode(Mode.REQUIRED);
-		ClientResponsePort.setMode(Mode.OFFERED);
-		
-		this.icomponentelement.add(ClientResponsePort);
-		this.icomponentelement.add(ClientRequestPort);
 	}
 
 	/* return port by given name */
@@ -58,8 +42,8 @@ public class Client extends ComponentImpl implements IObservable{
 	}
 	
 	@Override
-	public void SetInterfaceValue(IComponentElement element, Object value) {
-		super.SetInterfaceValue(element, value);
+	public void SetComponentElementValue(IComponentElement element, Object value) {
+		super.SetComponentElementValue(element, value);
 		if(((InterfaceElement)element).getMode() == Mode.OFFERED)
 			NotifyObserver((InterfaceElement)element);
 		else
@@ -75,5 +59,32 @@ public class Client extends ComponentImpl implements IObservable{
 	public void SetObserver(IObserver anObserver) {
 		this.observer = anObserver;
 		this.observer.AddObservable(this);
+	}
+
+	@Override
+	public void initPort() {
+		//init communication port (client->server) 
+				Port send_request = CCSFactoryImpl.eINSTANCE.createPort();
+				Port request_response = CCSFactoryImpl.eINSTANCE.createPort();
+				
+				send_request.setMode(Mode.OFFERED);
+				request_response.setMode(Mode.REQUIRED);
+				
+				this.icomponentelement.add(send_request);
+				this.icomponentelement.add(request_response);
+				
+				
+				/* Ports setup for outside communication */
+				//init request redirect port( clientServer->client)
+				Port ClientRequestPort =  CCSFactoryImpl.eINSTANCE.createPort();
+				//init communication port (client->clientServer) 
+				Port ClientResponsePort = CCSFactoryImpl.eINSTANCE.createPort();
+				
+				ClientRequestPort.setMode(Mode.REQUIRED);
+				ClientResponsePort.setMode(Mode.OFFERED);
+				
+				this.icomponentelement.add(ClientResponsePort);
+				this.icomponentelement.add(ClientRequestPort);
+		
 	}
 }

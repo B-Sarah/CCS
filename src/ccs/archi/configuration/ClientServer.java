@@ -3,24 +3,34 @@ package ccs.archi.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicEList;
+
 import ccs.archi.component.Client;
 import ccs.archi.component.Server;
 import ccs.archi.connector.RPC;
+import ccs.archi.interfaces.ICommonElement;
 import ccs.archi.interfaces.IObservable;
 import ccs.archi.interfaces.IObserver;
 import ccsM2.Attachement;
 import ccsM2.InterfaceElement;
-import ccsM2.Mode;
 import ccsM2.impl.CCSFactoryImpl;
 import ccsM2.impl.ConfigurationImpl;
+import ccsM2.Component;
+import ccsM2.Connector;
+import ccsM2.ILink;
 
-public class ClientServer extends ConfigurationImpl implements IObserver {
+public class ClientServer extends ConfigurationImpl implements ICommonElement, IObserver {
 	
 	private List<IObservable> observables = new ArrayList<IObservable>();
 
 	public ClientServer() {
 		Server server = new Server();
+		server.SetObserver(this);
+		this.component = new BasicEList<Component>();
+		this.connector = new BasicEList<Connector>();
+		this.ilink = new BasicEList<ILink>();
 		this.component.add(server);
+		initPort();
 	}
 	
 	public Server GetServer() {
@@ -28,10 +38,7 @@ public class ClientServer extends ConfigurationImpl implements IObserver {
 		return (Server)this.component.get(0);
 	}
 	
-	public Client CreateNewClient() {
-		//Client that will be returned
-		Client newClient = new Client();
-		
+	public Client addNewClient(Client newClient) {
 		//First, create the RPC that will link to server
 		RPC rpc = new RPC();
 		
@@ -58,6 +65,9 @@ public class ClientServer extends ConfigurationImpl implements IObserver {
 		rpcToClient.setRole(rpc.GetRoleByName(RPC.RoleName.callerResponse));
 		rpcToClient.setIcomponentelement(newClient.getPortByName(Client.PortName.request_response));
 		
+		newClient.SetObserver(this);
+		rpc.SetObserver(this);
+		
 		//Add created objects to the configuration's item list
 		this.component.add(newClient);
 		this.connector.add(rpc);
@@ -81,12 +91,17 @@ public class ClientServer extends ConfigurationImpl implements IObserver {
 		//retrieve attachement linked to notifier
 		Attachement linker = this.GetAttachementFromElement(notifier);
 		//case we need to redirect to component 
-		if(linker.getRole() == notifier) {
+		if(linker.getRole() == notifier) { 		// == notifier instanceof Role
 			GetComponentContainingElement(linker.getIcomponentelement()).
-			SetInterfaceValue(linker.getIcomponentelement(), notifier.getContainedValue());
+				SetComponentElementValue(linker.getIcomponentelement(), notifier.getContainedValue());
 		} else {
 			GetConnectorContainingRole(linker.getRole()).SetRoleValue(linker.getRole(), notifier.getContainedValue());
 		}
+	}
+
+	@Override
+	public void initPort() {
+
 	}
 	
 	

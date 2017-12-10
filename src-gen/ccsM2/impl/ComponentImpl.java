@@ -228,11 +228,11 @@ public class ComponentImpl extends MinimalEObjectImpl.Container implements Compo
 	}
 	
 	
-	public void SetInterfaceValue(IComponentElement element, Object value) {
+	public void SetComponentElementValue(IComponentElement element, Object value) {
 		((InterfaceElement)this.icomponentelement.get(this.icomponentelement.indexOf(element))).setContainedValue(value);
 	}
 	
-	public Object GetInterfaceValue(IComponentElement element) {
+	public Object GetComponentElementValue(IComponentElement element) {
 		return ((InterfaceElement)this.icomponentelement.get(this.icomponentelement.indexOf(element))).getContainedValue();
 	}
 	

@@ -1,6 +1,12 @@
 package ccs.archi.component;
 
+import java.util.ArrayList;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
 import ccs.archi.configuration.ServerDetail;
+import ccs.archi.interfaces.ICommonElement;
 import ccs.archi.interfaces.IObservable;
 import ccs.archi.interfaces.IObserver;
 import ccsM2.IComponentElement;
@@ -10,61 +16,40 @@ import ccsM2.Port;
 import ccsM2.impl.CCSFactoryImpl;
 import ccsM2.impl.ComponentImpl;
 
-public class Server extends ComponentImpl implements IObservable {
-	
-	private IObserver observer;
-	
-	public enum PortName{
-		receive_request,
-		responseToClientPort,
-		serverRequestRedirectPort,
-		responseFromDetailPort
-	}
-	
-	public Server() {
+public class Server extends ComponentImpl implements ICommonElement, IObservable {
 
-		this.configuration = new ServerDetail();
-		
-		/* Ports setup for client communication */ 
-		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
-		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();
-		
-		receive_request.setMode(Mode.REQUIRED);
-		responseToClientPort.setMode(Mode.OFFERED);
-	
-		this.icomponentelement.add(receive_request);
-		this.icomponentelement.add(responseToClientPort);
-		
-		/* Ports setup for detail communication */
-		Port serverRequestRedirectPort =  CCSFactoryImpl.eINSTANCE.createPort();
-		Port responseFromDetailPort = CCSFactoryImpl.eINSTANCE.createPort();
-		
-		serverRequestRedirectPort.setMode(Mode.OFFERED);
-		responseFromDetailPort.setMode(Mode.REQUIRED);
-		
-		this.icomponentelement.add(serverRequestRedirectPort);
-		this.icomponentelement.add(responseFromDetailPort);
+	private IObserver observer;
+
+	public enum PortName {
+		receive_request, responseToClientPort, serverRequestRedirectPort, responseFromDetailPort
 	}
-	
+
+	public Server() {
+		this.icomponentelement = new BasicEList<IComponentElement>();
+		this.configuration = new ServerDetail();
+		initPort();
+
+	}
+
 	@Override
-	public void SetInterfaceValue(IComponentElement element, Object value) {
-		super.SetInterfaceValue(element, value);
-		if(((InterfaceElement)element).getMode() == Mode.OFFERED)
-			NotifyObserver((InterfaceElement)element);
+	public void SetComponentElementValue(IComponentElement element, Object value) {
+		super.SetComponentElementValue(element, value);
+		if (((InterfaceElement) element).getMode() == Mode.OFFERED)
+			NotifyObserver((InterfaceElement) element);
 		else
 			Work(element);
 	}
-	
+
 	public Port GetPortByName(PortName name) {
-		switch(name) {
+		switch (name) {
 		case receive_request:
-			return (Port)this.icomponentelement.get(0);
+			return (Port) this.icomponentelement.get(0);
 		case responseToClientPort:
-			return (Port)this.icomponentelement.get(1);
+			return (Port) this.icomponentelement.get(1);
 		case serverRequestRedirectPort:
-			return (Port)this.icomponentelement.get(2);
+			return (Port) this.icomponentelement.get(2);
 		case responseFromDetailPort:
-			return (Port)this.icomponentelement.get(3);
+			return (Port) this.icomponentelement.get(3);
 		}
 		return null;
 	}
@@ -78,6 +63,38 @@ public class Server extends ComponentImpl implements IObservable {
 	public void SetObserver(IObserver anObserver) {
 		this.observer = anObserver;
 		this.observer.AddObservable(this);
+	}
+
+	@Override
+	public void initPort() {
+		/* Ports setup for client communication */
+		Port receive_request = CCSFactoryImpl.eINSTANCE.createPort();
+		Port responseToClientPort = CCSFactoryImpl.eINSTANCE.createPort();
+
+		receive_request.setMode(Mode.REQUIRED);
+		responseToClientPort.setMode(Mode.OFFERED);
+
+		System.out.println(receive_request);
+
+		this.icomponentelement.add(receive_request);
+		this.icomponentelement.add(responseToClientPort);
+
+		/* Ports setup for detail communication */
+		Port serverRequestRedirectPort = CCSFactoryImpl.eINSTANCE.createPort();
+		Port responseFromDetailPort = CCSFactoryImpl.eINSTANCE.createPort();
+
+		serverRequestRedirectPort.setMode(Mode.OFFERED);
+		responseFromDetailPort.setMode(Mode.REQUIRED);
+
+		this.icomponentelement.add(serverRequestRedirectPort);
+		this.icomponentelement.add(responseFromDetailPort);
+	}
+	
+	@Override
+	protected void Work(IComponentElement changedInput) {
+		super.Work(changedInput);
+		
+		SetComponentElementValue(GetPortByName(PortName.responseToClientPort), (Integer)((InterfaceElement)changedInput).getContainedValue() * 2);
 	}
 
 }
