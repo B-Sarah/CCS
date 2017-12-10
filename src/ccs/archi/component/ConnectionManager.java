@@ -30,6 +30,7 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement, 
 	}
 
 	public ConnectionManager() {
+		this.name = "ConnectionManager";
 		this.icomponentelement = new BasicEList<IComponentElement>();
 		connectedUsers = new HashMap<String, Boolean>();
 		initElements();
@@ -50,6 +51,14 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement, 
 		connectionToSecurity.SetMode(Mode.OFFERED);
 		responseFromDatabasePort.SetMode(Mode.REQUIRED);
 		responseFromSecurityPort.setMode(Mode.REQUIRED);
+		
+
+		connectionRequestPort.SetName("connectionRequestPort");
+		connectionResponsePort.SetName("connectionResponsePort");
+		connectionToDatabase.SetName("connectionToDatabase");
+		connectionToSecurity.SetName("connectionToSecurity");
+		responseFromDatabasePort.SetName("responseFromDatabasePort");
+		responseFromSecurityPort.SetName("responseFromSecurityPort");
 
 		this.icomponentelement.add(connectionRequestPort);
 		this.icomponentelement.add(connectionResponsePort);

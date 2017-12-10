@@ -18,31 +18,37 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 	private String lastUserLogInfos = null;
 
 	public enum PortName {
-		securityToDatabase, securityToConnection, responseFromConnection, responseFromDatabase
+		securityToDatabasePort, securityToConnectionPort, responseFromConnectionPort, responseFromDatabasePort
 
 	}
 
 	public SecurityManager() {
+		this.name = "SecurityManager";
 		this.icomponentelement = new BasicEList<IComponentElement>();
 		initElements();
 
 	}
 
 	public void initElements() {
-		Port securityToDatabase = CCSFactory.eINSTANCE.createPort();
-		Port securityToConnection = CCSFactory.eINSTANCE.createPort();
-		Port responseFromConnection = CCSFactory.eINSTANCE.createPort();
-		Port responseFromDatabase = CCSFactory.eINSTANCE.createPort();
+		Port securityToDatabasePort = CCSFactory.eINSTANCE.createPort();
+		Port securityToConnectionPort = CCSFactory.eINSTANCE.createPort();
+		Port responseFromConnectionPort = CCSFactory.eINSTANCE.createPort();
+		Port responseFromDatabasePort = CCSFactory.eINSTANCE.createPort();
 
-		securityToDatabase.setMode(Mode.OFFERED);
-		securityToConnection.setMode(Mode.OFFERED);
-		responseFromConnection.setMode(Mode.REQUIRED);
-		responseFromDatabase.SetMode(Mode.REQUIRED);
+		securityToDatabasePort.setMode(Mode.OFFERED);
+		securityToConnectionPort.setMode(Mode.OFFERED);
+		responseFromConnectionPort.setMode(Mode.REQUIRED);
+		responseFromDatabasePort.SetMode(Mode.REQUIRED);
+		
+		securityToDatabasePort.SetName("securityToDatabasePort");
+		securityToConnectionPort.SetName("securityToConnectionPort");
+		responseFromConnectionPort.SetName("responseFromConnectionPort");
+		responseFromDatabasePort.SetName("responseFromDatabasePort");
 
-		this.icomponentelement.add(securityToDatabase);
-		this.icomponentelement.add(securityToConnection);
-		this.icomponentelement.add(responseFromConnection);
-		this.icomponentelement.add(responseFromDatabase);
+		this.icomponentelement.add(securityToDatabasePort);
+		this.icomponentelement.add(securityToConnectionPort);
+		this.icomponentelement.add(responseFromConnectionPort);
+		this.icomponentelement.add(responseFromDatabasePort);
 	}
 
 	@Override
@@ -72,11 +78,11 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 		super.Work(changedInput);
 		Object response = ((InterfaceElement) changedInput).getContainedValue();
 
-		if (changedInput == getPortByName(PortName.responseFromConnection)) {
+		if (changedInput == getPortByName(PortName.responseFromConnectionPort)) {
 			lastUserLogInfos = ((String) response).split(":")[1] + ":" + ((String) response).split(":")[1];
-			SetComponentElementValue(getPortByName(PortName.securityToDatabase), response);
+			SetComponentElementValue(getPortByName(PortName.securityToDatabasePort), response);
 		}
-		if (changedInput == getPortByName(PortName.responseFromDatabase)) {
+		if (changedInput == getPortByName(PortName.responseFromDatabasePort)) {
 			String idEntered = lastUserLogInfos.split(":")[0];
 			String passwordEntered = lastUserLogInfos.split(":")[1];
 
@@ -88,20 +94,20 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 				response = idEntered + ":" + "false";
 			}
 		}
-		SetComponentElementValue(getPortByName(PortName.securityToConnection), response);
+		SetComponentElementValue(getPortByName(PortName.securityToConnectionPort), response);
 	}
 
 	
 	/* return port by given name */
 	public Port getPortByName(PortName name) {
 		switch (name) {
-		case securityToDatabase:
+		case securityToDatabasePort:
 			return (Port) icomponentelement.get(0);
-		case securityToConnection:
+		case securityToConnectionPort:
 			return (Port) icomponentelement.get(1);
-		case responseFromConnection:
+		case responseFromConnectionPort:
 			return (Port) icomponentelement.get(2);
-		case responseFromDatabase:
+		case responseFromDatabasePort:
 			return (Port) icomponentelement.get(3);
 		}
 		return null;

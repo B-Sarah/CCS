@@ -20,6 +20,7 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 	private Map<String, User> usersInformations;
 
 	public Database() {
+		this.name = "Database";
 		this.icomponentelement = new BasicEList<IComponentElement>();
 		initElements();
 	}
@@ -48,6 +49,11 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 		databaseToConnectionPort.setMode(Mode.OFFERED);
 		responseFromSecurityPort.setMode(Mode.REQUIRED);
 		responseFromConnectionPort.setMode(Mode.REQUIRED);
+		
+		databaseToSecurityPort.SetName("databaseToSecurityPort");
+		databaseToConnectionPort.SetName("databaseToConnectionPort");
+		responseFromSecurityPort.SetName("responseFromSecurityPort");
+		responseFromConnectionPort.SetName("responseFromConnectionPort");
 
 		this.icomponentelement.add(databaseToSecurityPort);
 		this.icomponentelement.add(databaseToConnectionPort);
