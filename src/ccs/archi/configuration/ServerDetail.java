@@ -101,25 +101,85 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		Attachement connectionToConnection_database = CCSFactoryImpl.eINSTANCE.createAttachement();
 		Attachement connection_databaseToDatabase = CCSFactoryImpl.eINSTANCE.createAttachement();
 		
+		connectionToConnection_database.setIcomponentelement(((ConnectionManager)connectionManager).
+				getPortByName(ConnectionManager.PortName.connectionToDatabase));
+		connectionToConnection_database.setRole(((Connection_Database)connection_database).
+				GetRoleByName(Connection_Database.RoleName.fromConnection));
+		
+		connection_databaseToDatabase.setRole(((Connection_Database)connection_database).
+				GetRoleByName(Connection_Database.RoleName.toDatabase));
+		connection_databaseToDatabase.setIcomponentelement(((Database)database).
+				getPortByName(Database.PortName.responseFromConnectionPort));
+		
 		//Linking database->connection
 		Attachement databaseToConnection_database = CCSFactoryImpl.eINSTANCE.createAttachement();
 		Attachement connection_databaseToConnection = CCSFactoryImpl.eINSTANCE.createAttachement();
+
+		databaseToConnection_database.setIcomponentelement(((Database)database).
+				getPortByName(Database.PortName.databaseToConnectionPort));
+		databaseToConnection_database.setRole(((Connection_Database)connection_database).
+				GetRoleByName(Connection_Database.RoleName.fromDatabase));
+		
+		connection_databaseToConnection.setRole(((Connection_Database)connection_database).
+				GetRoleByName(Connection_Database.RoleName.toConnection));
+		connection_databaseToConnection.setIcomponentelement(((ConnectionManager)connectionManager).
+				getPortByName(ConnectionManager.PortName.responseFromDatabasePort));
 		
 		//Linking connection->security
 		Attachement connectionToConnection_Security = CCSFactoryImpl.eINSTANCE.createAttachement();
 		Attachement connection_SecurityToSecurity = CCSFactoryImpl.eINSTANCE.createAttachement();
 		
+		connectionToConnection_Security.setIcomponentelement(((ConnectionManager)connectionManager).
+				getPortByName(ConnectionManager.PortName.connectionToSecurity));
+		connectionToConnection_Security.setRole(((Connection_Security)connection_security).
+				GetRoleByName(Connection_Security.RoleName.fromConnection));
+		
+		connection_SecurityToSecurity.setRole(((Connection_Security)connection_security).
+				GetRoleByName(Connection_Security.RoleName.toSecurity));
+		connection_SecurityToSecurity.setIcomponentelement(((SecurityManager)securityManager).
+				getPortByName(SecurityManager.PortName.responseFromConnection));
+		
 		//Linking security->connection
-		Attachement SecurityToConnection_Security = CCSFactoryImpl.eINSTANCE.createAttachement();
+		Attachement securityToConnection_Security = CCSFactoryImpl.eINSTANCE.createAttachement();
 		Attachement connection_SecurityToConnection = CCSFactoryImpl.eINSTANCE.createAttachement();
+		
+		securityToConnection_Security.setIcomponentelement(((SecurityManager)securityManager).
+				getPortByName(SecurityManager.PortName.securityToConnection));
+		securityToConnection_Security.setRole(((Connection_Security)connection_security).
+				GetRoleByName(Connection_Security.RoleName.fromSecurity));
+		
+		connection_SecurityToConnection.setRole(((Connection_Security)connection_security).
+				GetRoleByName(Connection_Security.RoleName.toConnection));
+		connection_SecurityToConnection.setIcomponentelement(((ConnectionManager)connectionManager).
+				getPortByName(ConnectionManager.PortName.responseFromSecurityPort));
 		
 		//Linking database->security
 		Attachement databaseToDatabase_Security = CCSFactoryImpl.eINSTANCE.createAttachement();
 		Attachement database_SecurityToSecurity = CCSFactoryImpl.eINSTANCE.createAttachement();
 		
+		databaseToDatabase_Security.setIcomponentelement(((Database)database).
+				getPortByName(Database.PortName.databaseToSecurityPort));
+		databaseToDatabase_Security.setRole(((Database_Security)database_security).
+				GetRoleByName(Database_Security.RoleName.fromDatabase));
+		
+		database_SecurityToSecurity.setRole(((Database_Security)database_security).
+				GetRoleByName(Database_Security.RoleName.toSecurity));
+		database_SecurityToSecurity.setIcomponentelement(((SecurityManager)securityManager).
+				getPortByName(SecurityManager.PortName.responseFromDatabase));
+		
 		//Linking security->database
 		Attachement securityToDatabase_Security = CCSFactoryImpl.eINSTANCE.createAttachement();
 		Attachement database_SecurityToDatabase = CCSFactoryImpl.eINSTANCE.createAttachement();
+		
+		securityToDatabase_Security.setIcomponentelement(((SecurityManager)securityManager).
+				getPortByName(SecurityManager.PortName.securityToDatabase));
+		securityToDatabase_Security.setRole(((Database_Security)database_security).
+				GetRoleByName(Database_Security.RoleName.fromSecurity));
+		
+		database_SecurityToDatabase.setRole(((Database_Security)database_security).
+				GetRoleByName(Database_Security.RoleName.toDatabase));
+		database_SecurityToDatabase.setIcomponentelement(((Database)database).
+				getPortByName(Database.PortName.responseFromSecurityPort));
 		
 		
 		this.component.add(connectionManager);
@@ -136,7 +196,7 @@ public class ServerDetail extends ConfigurationImpl  implements ICommonElement, 
 		this.ilink.add(connection_databaseToConnection);
 		this.ilink.add(connectionToConnection_Security);
 		this.ilink.add(connection_SecurityToSecurity);
-		this.ilink.add(SecurityToConnection_Security);
+		this.ilink.add(securityToConnection_Security);
 		this.ilink.add(connection_SecurityToConnection);
 		this.ilink.add(databaseToDatabase_Security);
 		this.ilink.add(database_SecurityToSecurity);
