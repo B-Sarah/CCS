@@ -1,12 +1,9 @@
 package ccs.archi.component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 
-import ccs.archi.component.ConnectionManager.PortName;
 import ccs.archi.interfaces.ICommonElement;
 import ccs.archi.interfaces.IObservable;
 import ccs.archi.interfaces.IObserver;
@@ -32,7 +29,9 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 	}
 
 	public User getUserInformations(String id) {
-		return usersInformations.get(id);
+		if (usersInformations.containsKey(id))
+			return usersInformations.get(id);
+		return null;
 	}
 
 	public enum PortName {
@@ -82,15 +81,24 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 	protected void Work(IComponentElement changedInput) {
 		super.Work(changedInput);
 		Object response = ((InterfaceElement) changedInput).getContainedValue();
+		String id = ((String) response).split(":")[1];
 
 		if (changedInput == getPortByName(PortName.responseFromSecurityPort)) {
-	
+			if (getUserInformations(id) != null) {
+				response = id + ":" + getUserInformations(id).getPassword();
+			} else {
+				response = "";
+			}
+
 			SetComponentElementValue(getPortByName(PortName.databaseToSecurityPort), response);
 		}
 		if (changedInput == getPortByName(PortName.responseFromConnectionPort)) {
+			if (getUserInformations(id) != null)
+				response = getUserInformations(id).toString();
+			else {
+				response = "";
+			}
 
-
-		
 		}
 		SetComponentElementValue(getPortByName(PortName.databaseToConnectionPort), response);
 	}
