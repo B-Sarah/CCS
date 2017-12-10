@@ -2,7 +2,6 @@ package ccs.archi.component;
 
 import org.eclipse.emf.common.util.BasicEList;
 
-import ccs.archi.component.ConnectionManager.PortName;
 import ccs.archi.interfaces.ICommonElement;
 import ccs.archi.interfaces.IObservable;
 import ccs.archi.interfaces.IObserver;
@@ -16,19 +15,18 @@ import ccsM2.impl.ComponentImpl;
 public class SecurityManager extends ComponentImpl implements ICommonElement, IObservable {
 
 	private IObserver observer;
+	private String lastUserLogInfos = null;
+
 	public enum PortName {
 		securityToDatabase, securityToConnection, responseFromConnection, responseFromDatabase
 
 	}
-
 
 	public SecurityManager() {
 		this.icomponentelement = new BasicEList<IComponentElement>();
 		initPort();
 
 	}
-
-
 
 	public void initPort() {
 		Port securityToDatabase = CCSFactory.eINSTANCE.createPort();
@@ -47,7 +45,6 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 		this.icomponentelement.add(responseFromDatabase);
 	}
 
-
 	@Override
 	public void SetObserver(IObserver anObserver) {
 		this.observer = anObserver;
@@ -64,25 +61,37 @@ public class SecurityManager extends ComponentImpl implements ICommonElement, IO
 	@Override
 	public void SetComponentElementValue(IComponentElement element, Object value) {
 		super.SetComponentElementValue(element, value);
-		if(((InterfaceElement)element).getMode() == Mode.OFFERED)
-			NotifyObserver((InterfaceElement)element);
+		if (((InterfaceElement) element).getMode() == Mode.OFFERED)
+			NotifyObserver((InterfaceElement) element);
 		else
 			Work(element);
 	}
+
 	@Override
 	protected void Work(IComponentElement changedInput) {
 		super.Work(changedInput);
 		Object response = ((InterfaceElement) changedInput).getContainedValue();
-		
+
 		if (changedInput == getPortByName(PortName.responseFromConnection)) {
-			SetComponentElementValue(getPortByName(PortName.securityToDatabase),response);
+			lastUserLogInfos = ((String) response).split(":")[1] + ":" + ((String) response).split(":")[1];
+			SetComponentElementValue(getPortByName(PortName.securityToDatabase), response);
 		}
 		if (changedInput == getPortByName(PortName.responseFromDatabase)) {
-			SetComponentElementValue(getPortByName(PortName.securityToConnection),response);
-		}
+			String idEntered = lastUserLogInfos.split(":")[0];
+			String passwordEntered = lastUserLogInfos.split(":")[1];
 
+			String correctPassword = ((String) response).split(":")[1];
+			if (lastUserLogInfos != null && passwordEntered.equals(correctPassword)) {
+				response = idEntered + ":" + "true";
+			} else {
+				lastUserLogInfos = null;
+				response = idEntered + ":" + "false";
+			}
+		}
+		SetComponentElementValue(getPortByName(PortName.securityToConnection), response);
 	}
 
+	
 	/* return port by given name */
 	public Port getPortByName(PortName name) {
 		switch (name) {
