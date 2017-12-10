@@ -34,31 +34,6 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 		return usersInformations.get(id);
 	}
 
-	
-	private boolean processRequestAuth(String id, String password) {
-		if (!id.isEmpty() && !password.isEmpty())
-			if (usersInformations.get(id).getPassword().equals(password))
-				return true;
-
-		return false;
-
-	}
-
-	private List<String> processRequestUserInfo(String id, boolean isAuth) {
-		ArrayList<String> infoList = new ArrayList<String>();
-		if (usersInformations.get(id) != null) {
-			if (!isAuth)
-				return null;
-			infoList.add(usersInformations.get(id).getFname());
-			infoList.add(usersInformations.get(id).getLname());
-			infoList.add(usersInformations.get(id).getMeetings());
-
-		}
-
-		return infoList;
-
-	}
-
 	public enum PortName {
 		databaseToSecurityPort, databaseToConnectionPort, responseFromSecurityPort, responseFromConnectionPort
 	}

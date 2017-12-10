@@ -124,13 +124,18 @@ public class ConnectionManager extends ComponentImpl implements ICommonElement, 
 		String[] informations = request.split(":");
 		if (informations[0].equals("login"))
 			return RequestType.Login;
+		
+		else if (informations[0].equals("logout"))    {
+			return RequestType.Logout;
+		}
 		else {
-			if (connectedUsers.get(informations[1])) {
+			if (connectedUsers.containsKey(informations[1]) && connectedUsers.get(informations[1])) {
 				return RequestType.UserInfos;
 			} else
 				return RequestType.Failure;
 
 		}
+		
 	}
 
 	/* return port by given name */
