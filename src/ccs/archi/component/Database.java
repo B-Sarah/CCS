@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.BasicEList;
 
+import ccs.archi.component.ConnectionManager.PortName;
 import ccs.archi.interfaces.ICommonElement;
 import ccs.archi.interfaces.IObservable;
 import ccs.archi.interfaces.IObserver;
@@ -80,8 +81,33 @@ public class Database extends ComponentImpl implements ICommonElement, IObservab
 	@Override
 	protected void Work(IComponentElement changedInput) {
 		super.Work(changedInput);
-		// SetComponentElementValue(GetPortByName(PortName.),
-		// (Integer)((InterfaceElement)changedInput).getContainedValue() * 2);
+		Object response = ((InterfaceElement) changedInput).getContainedValue();
+
+		if (changedInput == getPortByName(PortName.responseFromSecurityPort)) {
+	
+			SetComponentElementValue(getPortByName(PortName.databaseToSecurityPort), response);
+		}
+		if (changedInput == getPortByName(PortName.responseFromConnectionPort)) {
+
+
+		
+		}
+		SetComponentElementValue(getPortByName(PortName.databaseToConnectionPort), response);
+	}
+
+	/* return port by given name */
+	public Port getPortByName(PortName name) {
+		switch (name) {
+		case databaseToSecurityPort:
+			return (Port) icomponentelement.get(0);
+		case databaseToConnectionPort:
+			return (Port) icomponentelement.get(1);
+		case responseFromSecurityPort:
+			return (Port) icomponentelement.get(2);
+		case responseFromConnectionPort:
+			return (Port) icomponentelement.get(3);
+		}
+		return null;
 	}
 
 }
